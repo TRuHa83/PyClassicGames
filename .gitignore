@@ -1,0 +1,36 @@
+# Ignore Python virtual environment directories
+.venv
+
+# Ignore IDE specific files
+.vscode
+.idea
+
+# Ignore Git configuration directory
+.git
+
+# Ignore compiled Python files
+__pycache__/
+
+# User files
+data/score.db
+data/*.db-journal
+data/*.db-wal
+
+# OS generated files
+.DS_Store
+.DS_Store?
+Thumbs.db
+
+# Python build and distribution
+dist/
+build/
+*.egg-info/
+
+# Testing and Linting
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Environment variables
+.env
