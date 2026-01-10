@@ -1,0 +1,300 @@
+import random
+
+from PySide6.QtGui import QAction
+from PySide6.QtCore import QObject, QTimer
+from PySide6.QtWidgets import QPushButton, QLCDNumber, QMessageBox
+
+
+class MinesWeeper(QObject):
+    def __init__(self, ui_widget, score_games):
+        super().__init__()
+        self.ui_widget = ui_widget
+        self.score_games = score_games
+
+        self.mines = 20 # Cantidad de minas
+        self.rows = 16  # Filas
+        self.col = 9    # Columnas
+
+        self.timer = QTimer(self)
+
+        self.set_variables()
+        self.setup_connections()
+        self.gen_matriz()
+
+    def set_variables(self):
+        self.flags_remaining = self.mines
+        self.real_mines = 0
+        self.flags_good = 0
+        self.flag = False
+
+        self.seconds = 0
+
+        self.matriz = []
+
+        self.face = {
+            -1: "🤯", 0: "😎", 1: "😃",
+            2: "😄", 3: "😁", 4: "😆",
+            5: "😅", 6: "😂", 7: "😉",
+            8: "😍", 9: "🤩"
+        }
+
+        self.colors = {
+            1: "blue",
+            2: "green",
+            3: "red",
+            4: "darkblue",
+            5: "darkred",
+            6: "teal",
+            7: "black",
+            8: "gray"
+        }
+
+    def setup_connections(self):
+        # Configuramos el cronometro
+        self.timer.timeout.connect(self.clock)
+
+        # Configuramos el boton principal del tablero
+        self.face_btn = self.ui_widget.findChild(QPushButton, "face_btn")
+        self.face_btn.setText(self.face[1])
+        self.face_btn.clicked.connect(self.put_flag)
+
+        # Configuramos los lcd de tiempo
+        self.lcd_clock = self.ui_widget.findChild(QLCDNumber, "lcd_clock")
+        self.lcd_clock.display(self.seconds)
+        self.lcd_clock.setStyleSheet("background-color: black; color: red; border: 1px solid gray;")
+
+        # Configuramos los lcd de las banderas
+        self.lcd_lags = self.ui_widget.findChild(QLCDNumber, "lcd_score")
+        self.lcd_lags.display(self.flags_remaining)
+        self.lcd_lags.setStyleSheet("background-color: black; color: red; border: 1px solid gray;")
+
+        # Configuramos el botón de reset del menú
+        self.action_reset = self.ui_widget.window().findChild(QAction, "actionReset")
+        self.action_reset.triggered.connect(self.reset_game)
+
+        # Definimos las conexiones para todos los botones del tablero
+        for r in range(self.rows):
+            for c in range(self.col):
+                btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
+                btn.clicked.connect(self.check_box)
+
+    def reset_game(self):
+        print("mine reset")
+        self.set_variables()
+
+        for r in range(self.rows):
+            for c in range(self.col):
+                btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
+                btn.setEnabled(True)
+                btn.setFlat(False)
+                btn.setText("")
+                btn.setStyleSheet("")
+
+        self.face_btn.setText(self.face[1])
+        self.face_btn.setEnabled(True)
+
+        self.lcd_lags.display(self.flags_remaining)
+        self.lcd_clock.display(0)
+
+        self.gen_matriz()
+
+    def clock(self):
+        self.seconds += 1
+        self.lcd_clock.display(self.seconds)
+
+        if self.real_mines == self.mines:
+            self.face_btn.setText("🤩")
+            self.face_btn.setEnabled(False)
+
+            for r in range(self.rows):
+                for c in range(self.col):
+                    btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
+                    btn.setEnabled(False)
+                    if self.matriz[r][c] == -1:
+                        if btn.text() == "🚩":
+                            btn.setStyleSheet("background-color: green")
+                            self.flags_good += 1
+
+            self.timer.stop()
+            self.end_game(True)
+
+    def gen_matriz(self):
+        pos_mines = []
+        self.pos_negbr = [
+            (-1, -1), (-1, 0), (-1, 1),
+             (0, -1),          (0, 1),
+             (1, -1),  (1, 0), (1, 1)
+        ]
+
+        # Agrega ceros en la matriz
+        for r in range(self.rows):
+            self.matriz.append([])
+            for c in range(self.col):
+                self.matriz[r].append(0)
+
+        # Agrega las minas en posición linear de forma aleatoria
+        while self.flags_remaining > len(pos_mines):
+            pos = random.randrange(0, 144)
+            if pos not in pos_mines:
+                pos_mines.append(pos)
+
+        # Agrega las minas a la Matriz y
+        # calcula la cantidad de minas vecinas
+        for mine in pos_mines:
+            row, col = divmod(mine, self.col)
+            self.matriz[row][col] = -1
+            for dr, dc in self.pos_negbr:
+                nr, nc = row + dr, col + dc
+                if 0 <= nr < self.rows and 0 <= nc < self.col:
+                    if self.matriz[nr][nc] != -1:
+                        self.matriz[nr][nc] += 1
+
+        self.timer.start(1000)
+
+    def put_flag(self):
+        if not self.flag:
+            self.face_btn.setText("🚩")
+            self.flag = True
+            return
+
+        self.flag = False
+        self.face_btn.setText(self.face[1])
+
+    def flag_mine(self, row, col):
+        btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{row}_{col}")
+
+        if btn.text() == "🚩":
+            btn.setText("")
+            self.flags_remaining += 1
+            if self.matriz[row][col] == -1:
+                self.real_mines -= 1
+
+        elif self.flags_remaining > 0:
+            btn.setText("🚩")
+            self.flags_remaining -= 1
+            if self.matriz[row][col] == -1:
+                self.real_mines += 1
+
+        self.lcd_lags.display(self.flags_remaining)
+
+    def check_box(self):
+        sender = self.sender()
+        row = int(sender.property("row"))
+        col = int(sender.property("col"))
+
+        if self.flag:
+            self.flag_mine(row, col)
+            return
+
+        if self.matriz[row][col] == 0:
+            sender.setEnabled(False)
+            sender.setFlat(True)
+            self.uncover_zeros(row, col)
+            self.face_btn.setText(self.face[0])
+
+        elif self.matriz[row][col] > 0:
+            num = self.matriz[row][col]
+            self.face_btn.setText(self.face[num])
+            sender.setEnabled(False)
+            sender.setText(str(num))
+            sender.setStyleSheet(f"color: {self.colors[num]}")
+
+        else:
+            sender.setEnabled(False)
+            sender.setText("💣")
+            sender.setStyleSheet("background-color: red")
+
+            self.face_btn.setText(self.face[-1])
+            self.face_btn.setEnabled(False)
+
+            for r in range(self.rows):
+                for c in range(self.col):
+                    btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
+                    btn.setEnabled(False)
+                    if self.matriz[r][c] == -1:
+                        if btn.text() == "🚩":
+                            btn.setStyleSheet("background-color: green")
+                            self.flags_good += 1
+
+                        btn.setText("💣")
+
+            self.timer.stop()
+            self.end_game(False)
+
+    def uncover_zeros(self, row, col):
+        queue = [(row, col)]
+
+        while queue:
+            r, c = queue.pop(0) # Obtenemos y eliminamos el primer elemento de la cola
+            for dr, dc in self.pos_negbr:
+                nr, nc = r + dr, c + dc # Obtenemos las posiciones de cada vecino
+                if 0 <= nr < self.rows and 0 <= nc < self.col:
+                    if self.matriz[nr][nc] == 0:
+                        btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{nr}_{nc}")
+                        if btn.isEnabled():
+                            btn.setEnabled(False)
+                            btn.setFlat(True)
+                            queue.append((nr, nc))
+
+                    elif self.matriz[nr][nc] > 0:
+                        btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{nr}_{nc}")
+                        num = str(self.matriz[nr][nc])
+                        btn.setText(num)
+                        btn.setStyleSheet(f"color: {self.colors[int(num)]}")
+                        btn.setEnabled(False)
+
+    def calculate_score(self):
+        # Multiplicador
+        multiplier = 10000
+
+        # Uno como mínimo
+        time = max(1, self.seconds)
+
+        # Elevamos al cuadrado las banderas correctas
+        square = self.flags_good ** 2
+
+        # Calculamos las banderas incorrectas y balanceamos
+        incorrect = self.mines - (self.flags_remaining + self.flags_good)
+        balance = self.flags_good - incorrect
+
+        # Calculo de la puntuación final
+        score = (balance * square * multiplier) / time
+
+        # Devolvemos el resultado redondeado y asegurando que no sea negativo
+        return max(0, round(score))
+
+    def end_game(self, state):
+        score = self.calculate_score()
+        self.score_games.set_score("minesweeper", score)
+
+        best_today = self.score_games.get_best_today("minesweeper")
+        best_history = self.score_games.get_best_history("minesweeper")
+
+        if state:
+            title = "Felicidades"
+            message = f"""
+            <h3>¡¡ HAS GANADO !!</h3>
+            
+            <p>Puntuacion: <b>{str(score)}</b></p>
+
+            <p>· Mejor puntuación del día: <b>{best_today}</b></p>
+            <p>· Mejor puntuación historica: <b>{best_history}</b></p>
+            """
+            QMessageBox.information(self.ui_widget, title, message)
+
+        else:
+            title = "Fin del Juego"
+            message = f"""
+            <h3>¡¡ HAS PERDIDO !!</h3>
+            
+            <p>Puntuacion: <b>{str(score)}</b></p>
+
+            <p>· Mejor puntuación del día: <b>{best_today}</b></p>
+            <p>· Mejor puntuación histórica: <b>{best_history}</b></p>
+            <br>
+            """
+            QMessageBox.critical(self.ui_widget, title, message)
+
+    def exit_game(self):
+        self.action_reset.triggered.disconnect(self.reset_game)
+        self.timer.stop()
