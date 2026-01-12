@@ -48,8 +48,6 @@ class Wordle(QObject):
         self.set_variables()
         self.setup_connections()
 
-        print(self.turn)
-
     def set_variables(self):
         self.clean_board()
         self.word = secret_word()
