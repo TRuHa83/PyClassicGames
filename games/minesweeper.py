@@ -79,7 +79,6 @@ class MinesWeeper(QObject):
                 btn.clicked.connect(self.check_box)
 
     def reset_game(self):
-        print("mine reset")
         self.set_variables()
 
         for r in range(self.rows):
