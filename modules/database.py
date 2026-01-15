@@ -1,3 +1,5 @@
+import os
+import sys
 import sqlite3
 
 from pathlib import Path
@@ -5,7 +7,18 @@ from pathlib import Path
 
 class ScoreGames:
     def __init__(self, db_name="score.db"):
-        self.db_path = Path(__file__).parent.parent / "data" / db_name
+        # Comprobar OS y ruta del usuario
+        if sys.platform == "win32":
+            base_path = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local"))
+
+        else:
+            base_path = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share"))
+
+        # Crear carpeta el juego
+        data_dir = base_path / "PyClassicGames"
+        data_dir.mkdir(parents=True, exist_ok=True)
+
+        self.db_path = data_dir / db_name
         self.init_db()
 
     def connection_db(self):
