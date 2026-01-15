@@ -54,5 +54,5 @@ jobs:
         draft: true
         generate_release_notes: true
         files: |
-          dist/PyClassicGames-Linux-v${{ github.ref_name }}
-          dist/PyClassicGames-Windows-v${{ github.ref_name }}.exe
+          dist/PyClassicGames-Linux-${{ github.ref_name }}
+          dist/PyClassicGames-Windows-${{ github.ref_name }}.exe
