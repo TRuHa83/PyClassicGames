@@ -39,12 +39,12 @@ jobs:
     # Renombrado para Linux/MacOS
     - name: Rename Binary (Linux)
       if: matrix.os == 'ubuntu-latest'
-      run: mv dist/PyClassicGames dist/PyClassicGames-Linux-v${{ github.ref_name }}
+      run: mv dist/PyClassicGames dist/PyClassicGames-Linux-${{ github.ref_name }}
 
     # Renombrado para Windows
     - name: Rename Binary (Windows)
       if: matrix.os == 'windows-latest'
-      run: mv dist/PyClassicGames.exe dist/PyClassicGames-Windows-v${{ github.ref_name }}.exe
+      run: mv dist/PyClassicGames.exe dist/PyClassicGames-Windows-${{ github.ref_name }}.exe
 
     # Publica como borrador
     - name: Release
