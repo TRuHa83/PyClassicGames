@@ -6,28 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
+    <width>400</width>
     <height>560</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>450</width>
+    <width>400</width>
     <height>560</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>450</width>
+    <width>400</width>
     <height>560</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>PyClassic Games</string>
-  </property>
-  <property name="windowIcon">
-   <iconset resource="../resursos.qrc">
-    <normaloff>:/assets/assets/logo_128.png</normaloff>:/assets/assets/logo_128.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_6">
@@ -297,7 +293,7 @@ background-color: rgb(51, 209, 122);</string>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QLCDNumber" name="lcd_score">
+              <widget class="QLCDNumber" name="lcd_lags">
                <property name="minimumSize">
                 <size>
                  <width>80</width>
@@ -356,7 +352,7 @@ background-color: rgb(51, 209, 122);</string>
                 </font>
                </property>
                <property name="text">
-                <string/>
+                <string>😎</string>
                </property>
               </widget>
              </item>
@@ -6502,7 +6498,7 @@ background-color: rgb(51, 209, 122);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>450</width>
+     <width>400</width>
      <height>23</height>
     </rect>
    </property>
@@ -6540,7 +6536,7 @@ background-color: rgb(51, 209, 122);</string>
   </widget>
   <action name="actionAbout">
    <property name="text">
-    <string>Acerda de ...</string>
+    <string>Acerda de...</string>
    </property>
   </action>
   <action name="actionMenu">
@@ -6590,7 +6586,7 @@ background-color: rgb(51, 209, 122);</string>
   </action>
  </widget>
  <resources>
-  <include location="../resursos.qrc"/>
+  <include location="../recursos.qrc"/>
  </resources>
  <connections/>
 </ui>

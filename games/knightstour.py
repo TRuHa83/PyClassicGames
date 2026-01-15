@@ -1,5 +1,5 @@
-from PySide6.QtGui import QAction
-from PySide6.QtCore import QObject, QTimer
+from PySide6.QtGui     import QAction
+from PySide6.QtCore    import QObject, QTimer
 from PySide6.QtWidgets import QPushButton, QLCDNumber, QMessageBox
 
 
@@ -10,7 +10,7 @@ class KnightsTour(QObject):
         self.score_games = score_games
 
         self.rows = 8
-        self.col = 8
+        self.cols = 8
 
         self.timer = QTimer(self)
         self.milis = 0
@@ -23,6 +23,8 @@ class KnightsTour(QObject):
             (1, -2), (1, 2),   # derecha
             (2, -1), (2, 1)    # abajo
         ]
+
+        self.grid_btns = [[]] # Matriz de botones
 
         self.setup_connections()
 
@@ -40,9 +42,11 @@ class KnightsTour(QObject):
 
         # Definimos las conexiones para todos los botones del tablero
         for r in range(self.rows):
-            for c in range(self.col):
+            self.grid_btns.append([])
+            for c in range(self.cols):
                 btn = self.ui_widget.findChild(QPushButton, f"btn_horse_{r}_{c}")
                 btn.clicked.connect(self.check_box)
+                self.grid_btns[r].append(btn)
 
     def reset_game(self):
         self.count = 0
@@ -52,8 +56,8 @@ class KnightsTour(QObject):
         self.lcd_score.display(self.count)
 
         for r in range(self.rows):
-            for c in range(self.col):
-                btn = self.ui_widget.findChild(QPushButton, f"btn_horse_{r}_{c}")
+            for c in range(self.cols):
+                btn = self.grid_btns[r][c]
                 btn.setEnabled(True)
                 btn.setText("")
 
@@ -96,8 +100,8 @@ class KnightsTour(QObject):
 
     def change_states(self, last_poss):
         for r in range(self.rows):
-            for c in range(self.col):
-                btn = self.ui_widget.findChild(QPushButton, f"btn_horse_{r}_{c}")
+            for c in range(self.cols):
+                btn = self.grid_btns[r][c]
                 btn.setEnabled(False)
 
                 style = btn.styleSheet()
@@ -111,13 +115,13 @@ class KnightsTour(QObject):
         for dx, dy in self.moves:
             row = last_poss[0] + dx
             col = last_poss[1] + dy
-            if 0 <= row < self.rows and 0 <= col < self.col:
-                btn = self.ui_widget.findChild(QPushButton, f"btn_horse_{row}_{col}")
+            if 0 <= row < self.rows and 0 <= col < self.cols:
+                btn = self.grid_btns[row][col]
                 if btn.text() == "":
                     moves.append((row, col))
 
         for move in moves:
-            btn = self.ui_widget.findChild(QPushButton, f"btn_horse_{move[0]}_{move[1]}")
+            btn = self.grid_btns[move[0]][move[1]]
             btn.setEnabled(True)
 
             style = btn.styleSheet()

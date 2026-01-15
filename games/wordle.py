@@ -7,7 +7,6 @@ from PySide6.QtWidgets import QPushButton, QMessageBox, QLabel
 
 def secret_word():
     index = random.randint(0, 484)
-
     with open("data/words.txt", 'r', encoding='utf-8') as f:
         for i, linea in enumerate(f):
             if i == index:
@@ -44,6 +43,13 @@ class Wordle(QObject):
         background-color: rgb(154, 153, 150);
         """
 
+        self.grid_btns = [[]]
+        for r in range(6):
+            self.grid_btns.append([])
+            for c in range(5):
+                btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{r}_{c}")
+                self.grid_btns[r].append(btn)
+
         self.load_words()
         self.set_variables()
         self.setup_connections()
@@ -60,7 +66,7 @@ class Wordle(QObject):
     def clean_board(self):
         for r in range(6):
             for c in range(5):
-                btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{r}_{c}")
+                btn = self.grid_btns[r][c]
                 btn.setText("")
                 btn.setStyleSheet(self.neutro)
 
@@ -70,7 +76,10 @@ class Wordle(QObject):
 
         # Configuramos el botón de reset del menú
         self.action_reset = self.ui_widget.window().findChild(QAction, "actionReset")
+        self.label_score = self.ui_widget.findChild(QLabel, "label_score")
+
         self.action_reset.triggered.connect(self.reset_game)
+        self.update_score()
 
         # Activamos los eventos externos
         self.ui_widget.installEventFilter(self)
@@ -114,10 +123,10 @@ class Wordle(QObject):
         self.update_score()
 
     def reset_game(self):
+        self.timer.stop()
         self.set_variables()
 
-        label_score = self.ui_widget.findChild(QLabel, "label_score")
-        label_score.setText(str(self.score))
+        self.label_score.setText(str(self.score))
 
     def load_words(self):
         self.valid_words = []
@@ -127,15 +136,15 @@ class Wordle(QObject):
 
     def erase_word(self):
         for n in range(5):
-            btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{self.turn}_{n}")
+            btn = self.grid_btns[self.turn][n]
             btn.setText("")
 
     def write_letter(self, letter):
-        btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{self.turn}_{len(self.user_word) - 1}")
+        btn = self.grid_btns[self.turn][len(self.user_word) - 1]
         btn.setText(letter)
 
     def remove_letter(self):
-        btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{self.turn}_{len(self.user_word)}")
+        btn = self.grid_btns[self.turn][len(self.user_word)]
         btn.setText("")
 
     def send_word(self):
@@ -148,17 +157,17 @@ class Wordle(QObject):
             # Evaluamos las letras de la palabra introducida
             for n, letter in enumerate(self.user_word):
                 if letter == self.word[n]:
-                    btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{self.turn}_{n}")
+                    btn = self.grid_btns[self.turn][n]
                     btn.setStyleSheet(self.verde)
 
                 elif letter in self.word:
-                    btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{self.turn}_{n}")
+                    btn = self.grid_btns[self.turn][n]
                     btn.setStyleSheet(self.orange)
                     self.score -= 50
                     self.valid = False
 
                 else:
-                    btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{self.turn}_{n}")
+                    btn = self.grid_btns[self.turn][n]
                     btn.setStyleSheet(self.grey)
                     self.score -= 100
                     self.valid = False
@@ -183,8 +192,7 @@ class Wordle(QObject):
         self.user_word = []
 
     def update_score(self):
-        label_score = self.ui_widget.findChild(QLabel, "label_score")
-        label_score.setText(str(self.score))
+        self.label_score.setText(str(self.score))
 
     def is_finish(self):
         if self.valid or self.turn == 5:

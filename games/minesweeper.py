@@ -13,9 +13,12 @@ class MinesWeeper(QObject):
 
         self.mines = 20 # Cantidad de minas
         self.rows = 16  # Filas
-        self.col = 9    # Columnas
+        self.cols = 9   # Columnas
+
 
         self.timer = QTimer(self)
+
+        self.grid_btns = [[]] # Matriz de botones
 
         self.set_variables()
         self.setup_connections()
@@ -53,37 +56,42 @@ class MinesWeeper(QObject):
         # Configuramos el cronometro
         self.timer.timeout.connect(self.clock)
 
-        # Configuramos el boton principal del tablero
+        # Buscamos los widgets en la interfaz
         self.face_btn = self.ui_widget.findChild(QPushButton, "face_btn")
+        self.lcd_clock = self.ui_widget.findChild(QLCDNumber, "lcd_clock")
+        self.lcd_lags = self.ui_widget.findChild(QLCDNumber, "lcd_lags")
+        self.action_reset = self.ui_widget.window().findChild(QAction, "actionReset")
+
+        # Configuramos el botón principal del tablero
         self.face_btn.setText(self.face[1])
         self.face_btn.clicked.connect(self.put_flag)
 
         # Configuramos los lcd de tiempo
-        self.lcd_clock = self.ui_widget.findChild(QLCDNumber, "lcd_clock")
         self.lcd_clock.display(self.seconds)
         self.lcd_clock.setStyleSheet("background-color: black; color: red; border: 1px solid gray;")
 
         # Configuramos los lcd de las banderas
-        self.lcd_lags = self.ui_widget.findChild(QLCDNumber, "lcd_score")
         self.lcd_lags.display(self.flags_remaining)
         self.lcd_lags.setStyleSheet("background-color: black; color: red; border: 1px solid gray;")
 
         # Configuramos el botón de reset del menú
-        self.action_reset = self.ui_widget.window().findChild(QAction, "actionReset")
         self.action_reset.triggered.connect(self.reset_game)
 
         # Definimos las conexiones para todos los botones del tablero
         for r in range(self.rows):
-            for c in range(self.col):
+            self.grid_btns.append([])
+
+            for c in range(self.cols):
                 btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
                 btn.clicked.connect(self.check_box)
+                self.grid_btns[r].append(btn)
 
     def reset_game(self):
         self.set_variables()
 
         for r in range(self.rows):
-            for c in range(self.col):
-                btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
+            for c in range(self.cols):
+                btn = self.grid_btns[r][c]
                 btn.setEnabled(True)
                 btn.setFlat(False)
                 btn.setText("")
@@ -106,8 +114,8 @@ class MinesWeeper(QObject):
             self.face_btn.setEnabled(False)
 
             for r in range(self.rows):
-                for c in range(self.col):
-                    btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
+                for c in range(self.cols):
+                    btn = self.grid_btns[r][c]
                     btn.setEnabled(False)
                     if self.matriz[r][c] == -1:
                         if btn.text() == "🚩":
@@ -121,14 +129,14 @@ class MinesWeeper(QObject):
         pos_mines = []
         self.pos_negbr = [
             (-1, -1), (-1, 0), (-1, 1),
-             (0, -1),          (0, 1),
-             (1, -1),  (1, 0), (1, 1)
+            ( 0, -1),          ( 0, 1),
+            ( 1, -1), ( 1, 0), ( 1, 1)
         ]
 
         # Agrega ceros en la matriz
         for r in range(self.rows):
             self.matriz.append([])
-            for c in range(self.col):
+            for c in range(self.cols):
                 self.matriz[r].append(0)
 
         # Agrega las minas en posición linear de forma aleatoria
@@ -140,11 +148,11 @@ class MinesWeeper(QObject):
         # Agrega las minas a la Matriz y
         # calcula la cantidad de minas vecinas
         for mine in pos_mines:
-            row, col = divmod(mine, self.col)
+            row, col = divmod(mine, self.cols)
             self.matriz[row][col] = -1
-            for dr, dc in self.pos_negbr:
-                nr, nc = row + dr, col + dc
-                if 0 <= nr < self.rows and 0 <= nc < self.col:
+            for pr, pc in self.pos_negbr:
+                nr, nc = row + pr, col + pc
+                if 0 <= nr < self.rows and 0 <= nc < self.cols:
                     if self.matriz[nr][nc] != -1:
                         self.matriz[nr][nc] += 1
 
@@ -160,7 +168,7 @@ class MinesWeeper(QObject):
         self.face_btn.setText(self.face[1])
 
     def flag_mine(self, row, col):
-        btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{row}_{col}")
+        btn = self.grid_btns[row][col]
 
         if btn.text() == "🚩":
             btn.setText("")
@@ -207,8 +215,8 @@ class MinesWeeper(QObject):
             self.face_btn.setEnabled(False)
 
             for r in range(self.rows):
-                for c in range(self.col):
-                    btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
+                for c in range(self.cols):
+                    btn = self.grid_btns[r][c]
                     btn.setEnabled(False)
                     if self.matriz[r][c] == -1:
                         if btn.text() == "🚩":
@@ -227,16 +235,16 @@ class MinesWeeper(QObject):
             r, c = queue.pop(0) # Obtenemos y eliminamos el primer elemento de la cola
             for dr, dc in self.pos_negbr:
                 nr, nc = r + dr, c + dc # Obtenemos las posiciones de cada vecino
-                if 0 <= nr < self.rows and 0 <= nc < self.col:
+                if 0 <= nr < self.rows and 0 <= nc < self.cols:
                     if self.matriz[nr][nc] == 0:
-                        btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{nr}_{nc}")
+                        btn = self.grid_btns[nr][nc]
                         if btn.isEnabled():
                             btn.setEnabled(False)
                             btn.setFlat(True)
                             queue.append((nr, nc))
 
                     elif self.matriz[nr][nc] > 0:
-                        btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{nr}_{nc}")
+                        btn = self.grid_btns[nr][nc]
                         num = str(self.matriz[nr][nc])
                         btn.setText(num)
                         btn.setStyleSheet(f"color: {self.colors[int(num)]}")
