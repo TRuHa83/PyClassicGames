@@ -6,6 +6,10 @@ on:
     tags:
       - 'v*'
 
+# Permiso de escritura
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build on ${{ matrix.os }}
@@ -46,13 +50,33 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: mv dist/PyClassicGames.exe dist/PyClassicGames-Windows-${{ github.ref_name }}.exe
 
-    # Publica como borrador
+    # Sube el archivo a una ruta temporal
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: binary-${{ matrix.os }}
+        path: dist/PyClassicGames*
+
+  release:
+    # Crea el Release
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    
+    steps:
+    # Descarga los archivos de antes
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        pattern: binary-*
+        merge-multiple: true
+        path: dist
+
+    # Publica el borrador del Release
     - name: Release
       uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
       with:
         draft: true
         generate_release_notes: true
-        files: |
-          dist/PyClassicGames-Linux-${{ github.ref_name }}
-          dist/PyClassicGames-Windows-${{ github.ref_name }}.exe
+        files: dist/*
