@@ -1,2 +1,133 @@
-# PackClassicGames
-Recopilatorio de juegos clásicos en Python y PySide6
+# PyClassicGames
+
+![GUI Framework](https://img.shields.io/badge/GUI-PySide6-green?logo=qt&logoColor=white)
+![Database](https://img.shields.io/badge/Database-SQLite-sqlite?logo=sqlite&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Development-blue)
+
+![Python Version](https://img.shields.io/badge/python-3.13-blue?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/TRuHa83/PyClassicGames?label=Versi%C3%B3n&color=blueviolet)
+![GitHub all releases](https://img.shields.io/github/downloads/TRuHa83/PyClassicGames/total?label=Descargas&color=orange)
+
+>  **Proyecto final de Desarrollo de interfaces**.<br>Una colección moderna de juegos clásicos de lógica y estrategia, desarrollada en Python con una interfaz gráfica robusta.
+
+---
+
+## Capturas de Pantalla
+
+| Menú | Buscaminas | Salto del Caballo | Wordle |
+| :---: | :---: | :---: | :---: |
+| ![Menu](images/menu.png) | ![Buscaminas](images/buscaminas.png) | ![SaltoCaballo](images/saltocaballo.png) | ![Wordle](images/wordle.png) |
+
+## Descripción del Proyecto
+
+**PyClassicGames** es una aplicación de escritorio que unifica tres juegos clásicos bajo una misma interfaz.
+El objetivo del proyecto no es solo recrear los juegos, sino implementar una UI que permita al usuario la ejecución de los mismos.
+
+### Los Juegos
+1.  **💣 Buscaminas:** El clásico de Windows. Algoritmo de expansión recursiva para abrir celdas vacías y sistema de banderas.
+2.  **🐴 El Salto del Caballo:** Desafío de ajedrez matemático. ¿Puedes visitar todas las casillas del tablero sin repetir ninguna?
+3.  **🟩 wordle:** Versión del popular juego de adivinar palabras, con lógica de colores y diccionario en español.
+
+---
+
+## Características Técnicas
+
+Con este proyecto demuestro capacidades de desarrollo para software de escritorio:
+
+- [x] **Arquitectura:** Separación lógica entre la interfaz (Vistas), los datos (Modelos) y la lógica de juego (Controladores).
+- [x] **Base de Datos:** Sistema persistente que almacena automáticamente las puntuaciones y fecha al finalizar cada partida.
+- [ ] **Informes PDF:** Generación dinámica de reportes de "Salón de la Fama" utilizando la librería **ReportLab**.
+- [ ] **Actualizaciones:** Sistema integrado que consulta el repositorio GitHub para verificar si existen nuevas versiones del software.
+
+---
+
+## Instalación y Uso
+
+Este proyecto ha sido desarrollado en entornos **Linux**, aunque es compatible con Windows y Mac.
+
+### Requisitos Previos
+* Python 3.13 o superior.
+
+### Opción A: Instalación Moderna (uv) - Recomendada
+Si no dispones de **uv** instalado en tu sistema, puedes ver cómo hacerlo [aquí](https://docs.astral.sh/uv/getting-started/installation/).
+
+1.  **Clonar y sincronizar:**
+    ```bash
+    git clone https://github.com/TRuHa83/PyClassicGames.git
+    cd PyClassicGames
+    uv sync
+    ```
+    *(Esto creará el entorno virtual e instalará todas las dependencias necesarias)*
+
+
+2. **Ejecutar la aplicación:**
+    ```bash
+    uv run main.py
+    ```
+
+### Opción B: Instalación Tradicional (Pip)
+Para entornos que utilizan el método estándar tradicional:
+
+1.  **Crear entorno virtual:**
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # En Linux/Mac
+    # .venv\Scripts\activate   # En Windows
+    ```
+
+2.  **Instalar dependencias:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Ejecutar:**
+    ```bash
+    python main.py
+    ```
+
+
+### Opción Rápida: Ejecutables (Sin instalación)
+Si solo quieres jugar sin configurar entornos de desarrollo:
+
+1.  Ve a la sección de **[Releases](https://github.com/TRuHa83/PyClassicGames/releases)** del repositorio.
+2.  Descarga el archivo correspondiente a tu sistema operativo.
+3.  ¡Ejecuta y juega!
+
+> **Nota:** Estos ejecutables se generan y publican automáticamente mediante **GitHub Actions** cada vez que se lanza una nueva versión, garantizando que siempre descargues la última actualización estable.
+---
+
+## Estructura del Proyecto
+
+```text
+PyClassicGames/
+├── assets/              # Imágenes, iconos y recursos
+│
+├── data/                # Archivo .db y diccionario
+│
+├── games/
+│   ├── knightstour.py   # Lógica juego salto del caballo
+│   ├── minesweeper.py   # Lógica juego buscaminas
+│   └── wordle.py        # Lógica juego Wordle
+│
+├── ui/
+│   ├── MainWindow.py    # Vista menu principal 
+│   └── AboutUs.py       # Vista de Acerca de...
+│
+├── modules/
+│   └── database.py      # Módulo de base de datos
+│
+├── main.py              # Punto de entrada
+├── version.py           # Información de la aplicación
+│
+├── uv.lock              # Dependencias (uv)
+├── pyproject.toml       # Información del proyecto (uv)
+│
+├── requirements.txt     # Dependencias (pip)
+│
+├── PyClassicGames.spec  # Ajustes para PyInstaller
+│
+├── README.md            # Documentación
+└── LICENSE              # Licencia del proyecto
+```
