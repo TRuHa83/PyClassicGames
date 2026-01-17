@@ -1,4 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
+import sys
 
 
 a = Analysis(
@@ -14,6 +15,12 @@ a = Analysis(
     noarchive=False,
     optimize=0,
 )
+
+# FIX LINUX: Eliminar librerías de sistema (GLib, Gio) del paquete.
+if sys.platform.startswith('linux'):
+    sys_libs = ['libglib', 'libgio', 'libgobject', 'libgthread']
+    a.binaries = [x for x in a.binaries if not any(lib in x[0] for lib in sys_libs)]
+
 pyz = PYZ(a.pure)
 
 exe = EXE(
