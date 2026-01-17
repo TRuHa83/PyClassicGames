@@ -63,6 +63,7 @@ class MainApp:
         self.exit_games()
         self.state = SelectGame.MENU
         self.ui.menuGame.setEnabled(False)
+        self.window.setWindowTitle(version.__app_name__)
         self.ui.stackedWidget.setCurrentWidget(self.ui.menu)
 
     def minesweeper(self):
@@ -70,6 +71,7 @@ class MainApp:
         self.state = SelectGame.MINE
 
         self.ui.menuGame.setEnabled(True)
+        self.window.setWindowTitle("Buscaminas")
         self.ui.stackedWidget.setCurrentWidget(self.ui.mine)
 
         self.game_minesweeper = MinesWeeper(self.ui.mine, self.score_games)
@@ -78,6 +80,7 @@ class MainApp:
         self.exit_games()
         self.state = SelectGame.HORSE
         self.ui.menuGame.setEnabled(True)
+        self.window.setWindowTitle("Salto del Caballo")
         self.ui.stackedWidget.setCurrentWidget(self.ui.horse)
 
         self.game_knightstour = KnightsTour(self.ui.horse, self.score_games)
@@ -86,6 +89,7 @@ class MainApp:
         self.exit_games()
         self.state = SelectGame.WORDLE
         self.ui.menuGame.setEnabled(True)
+        self.window.setWindowTitle("Wordle")
         self.ui.stackedWidget.setCurrentWidget(self.ui.wordle)
 
         self.game_wordle = Wordle(self.ui.wordle, self.score_games)
