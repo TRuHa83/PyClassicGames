@@ -5,7 +5,7 @@ from enum import Enum, auto
 
 from modules.database  import ScoreGames
 
-from ui.AboutAs        import Ui_AboutAs
+from ui.AboutUs        import Ui_AboutAs
 from ui.MainWindow     import Ui_MainWindow
 
 from games.wordle      import Wordle
