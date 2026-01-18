@@ -5,15 +5,17 @@ from enum import Enum, auto
 
 from modules.database  import ScoreGames
 
-from ui.AboutUs        import Ui_AboutAs
-from ui.MainWindow     import Ui_MainWindow
+from ui.score          import Ui_Score
+from ui.about_us       import Ui_AboutUs
+from ui.main_window    import Ui_MainWindow
 
 from games.wordle      import Wordle
 from games.minesweeper import MinesWeeper
 from games.knightstour import KnightsTour
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QDialog
+    QApplication, QMainWindow, QDialog,
+    QTableWidgetItem, QHeaderView
 )
 
 
@@ -33,6 +35,11 @@ class MainApp:
         self.window = QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)
+
+        # Cargamos la puntuación
+        self.score = QDialog()
+        self.score_ui = Ui_Score()
+        self.score_ui.setupUi(self.score)
 
         # Cargamos Acerca de..
         self.dialog = QDialog()
@@ -95,7 +102,36 @@ class MainApp:
 
         self.game_wordle = Wordle(self.ui.wordle, self.score_games)
 
-    def about(self):
+    def _score(self):
+        score_mine = self.score_games.get_all_score("minesweeper")
+        score_horse = self.score_games.get_all_score("knightstour")
+        score_wordle = self.score_games.get_all_score("wordle")
+
+        # Le damos el ancho maximo a la primera columna
+        self.score_ui.score_mines.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        self.score_ui.score_horse.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        self.score_ui.score_wordle.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+
+        # Agregamos tantas filas como entradas hay
+        self.score_ui.score_mines.setRowCount(len(score_mine))
+        self.score_ui.score_horse.setRowCount(len(score_horse))
+        self.score_ui.score_wordle.setRowCount(len(score_wordle))
+
+        for i, s in enumerate(score_mine):
+            self.score_ui.score_mines.setItem(i, 0, QTableWidgetItem(str(s["date"])))
+            self.score_ui.score_mines.setItem(i, 1, QTableWidgetItem(str(s["score"])))
+
+        for i, s in enumerate(score_horse):
+            self.score_ui.score_horse.setItem(i, 0, QTableWidgetItem(str(s["date"])))
+            self.score_ui.score_horse.setItem(i, 1, QTableWidgetItem(str(s["score"])))
+
+        for i, s in enumerate(score_wordle):
+            self.score_ui.score_wordle.setItem(i, 0, QTableWidgetItem(str(s["date"])))
+            self.score_ui.score_wordle.setItem(i, 1, QTableWidgetItem(str(s["score"])))
+
+        self.score.exec()
+
+    def _about(self):
         self.about_as.label_version.setText(version.__version__)
         self.about_as.label_author.setText(version.__author__)
         self.about_as.label_name.setText(version.__app_name__)
