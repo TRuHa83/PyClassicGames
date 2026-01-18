@@ -143,8 +143,9 @@ class KnightsTour(QObject):
     def _end_game(self, state):
         self.timer.stop()
 
-        score = self.calculate_score()
-        self.score_games.set_score("knightstour", score)
+        score = self._calculate_score()
+        if score > 0:
+            self.score_games.set_score("knightstour", score)
 
         best_today = self.score_games.get_best_today("knightstour")
         best_history = self.score_games.get_best_history("knightstour")

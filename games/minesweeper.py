@@ -270,9 +270,10 @@ class MinesWeeper(QObject):
         # Devolvemos el resultado redondeado y asegurando que no sea negativo
         return max(0, round(score))
 
-    def end_game(self, state):
-        score = self.calculate_score()
-        self.score_games.set_score("minesweeper", score)
+    def _end_game(self, state):
+        score = self._calculate_score()
+        if score > 0:
+            self.score_games.set_score("minesweeper", score)
 
         best_today = self.score_games.get_best_today("minesweeper")
         best_history = self.score_games.get_best_history("minesweeper")

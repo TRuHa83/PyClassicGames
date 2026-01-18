@@ -197,7 +197,8 @@ class Wordle(QObject):
         if self.valid or self.turn == 5:
             self.timer.stop()
 
-            self.score_games.set_score("wordle", self.score)
+            if self.score > 0:
+                self.score_games.set_score("wordle", self.score)
 
             best_today = self.score_games.get_best_today("wordle")
             best_history = self.score_games.get_best_history("wordle")
