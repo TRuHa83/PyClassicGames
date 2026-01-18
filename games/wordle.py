@@ -5,15 +5,6 @@ from PySide6.QtCore import QObject, Qt, QEvent, QTimer
 from PySide6.QtWidgets import QPushButton, QMessageBox, QLabel
 
 
-def secret_word():
-    index = random.randint(0, 484)
-    with open("data/words.txt", 'r', encoding='utf-8') as f:
-        for i, linea in enumerate(f):
-            if i == index:
-                word = linea.strip().lower()
-                return word
-
-
 class Wordle(QObject):
     def __init__(self, ui_widget, score_games):
         super().__init__()
@@ -50,36 +41,36 @@ class Wordle(QObject):
                 btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{r}_{c}")
                 self.grid_btns[r].append(btn)
 
-        self.load_words()
-        self.set_variables()
-        self.setup_connections()
+        self._load_words()
+        self._set_variables()
+        self._setup_connections()
 
-    def set_variables(self):
-        self.clean_board()
-        self.word = secret_word()
+    def _set_variables(self):
+        self._clean_board()
+        self.word = self._get_secret_word()
         self.score = 5000
 
         self.turn = 0
         self.user_word = []
         self.finished = False
 
-    def clean_board(self):
+    def _clean_board(self):
         for r in range(6):
             for c in range(5):
                 btn = self.grid_btns[r][c]
                 btn.setText("")
                 btn.setStyleSheet(self.neutro)
 
-    def setup_connections(self):
+    def _setup_connections(self):
         # Configuramos el cronometro
-        self.timer.timeout.connect(self.clock)
+        self.timer.timeout.connect(self._clock)
 
         # Configuramos el botón de reset del menú
         self.action_reset = self.ui_widget.window().findChild(QAction, "actionReset")
         self.label_score = self.ui_widget.findChild(QLabel, "label_score")
 
-        self.action_reset.triggered.connect(self.reset_game)
-        self.update_score()
+        self.action_reset.triggered.connect(self._reset_game)
+        self._update_score()
 
         # Activamos los eventos externos
         self.ui_widget.installEventFilter(self)
@@ -94,60 +85,68 @@ class Wordle(QObject):
                     if len(self.user_word) < 5:
                         letter = event.text()
                         self.user_word.append(letter.lower())
-                        self.write_letter(letter.upper())
+                        self._write_letter(letter.upper())
                     return True
 
                 # Tecla de RETROCESO
                 elif key == Qt.Key_Backspace:
                     if len(self.user_word) > 0:
                         self.user_word.pop()
-                        self.remove_letter()
+                        self._remove_letter()
                     return True
 
                 # Tecla SUPRIMIR
                 elif key == Qt.Key_Delete:
                     self.user_word = []
-                    self.erase_word()
+                    self._erase_word()
                     return True
 
                 # Teclas ENTER y RETURN
                 elif key == Qt.Key_Enter or key == Qt.Key_Return:
                     if len(self.user_word) == 5:
-                        self.send_word()
+                        self._send_word()
                     return True
 
         return super().eventFilter(source, event)
 
-    def clock(self):
+    def _clock(self):
         self.score -= 1
-        self.update_score()
+        self._update_score()
 
-    def reset_game(self):
+    def _reset_game(self):
         self.timer.stop()
-        self.set_variables()
+        self._set_variables()
 
         self.label_score.setText(str(self.score))
 
-    def load_words(self):
+    def _load_words(self):
         self.valid_words = []
         with open("data/valid_words.txt", 'r', encoding='utf-8') as f:
             for linea in f:
                 self.valid_words.append(linea.strip().lower())
 
-    def erase_word(self):
+    def _get_secret_word(self):
+        index = random.randint(0, 484)
+        with open("data/words.txt", 'r', encoding='utf-8') as f:
+            for i, linea in enumerate(f):
+                if i == index:
+                    word = linea.strip().lower()
+                    return word
+
+    def _erase_word(self):
         for n in range(5):
             btn = self.grid_btns[self.turn][n]
             btn.setText("")
 
-    def write_letter(self, letter):
+    def _write_letter(self, letter):
         btn = self.grid_btns[self.turn][len(self.user_word) - 1]
         btn.setText(letter)
 
-    def remove_letter(self):
+    def _remove_letter(self):
         btn = self.grid_btns[self.turn][len(self.user_word)]
         btn.setText("")
 
-    def send_word(self):
+    def _send_word(self):
         # Unimos todas las letras en una única palabra
         word = "".join(self.user_word)
 
@@ -173,10 +172,10 @@ class Wordle(QObject):
                     self.valid = False
 
             # Actualizamos la puntuación mostrada
-            self.update_score()
+            self._update_score()
 
             # Evaluamos si ha terminado el juego
-            if self.is_finish():
+            if self._is_finish():
                 return
 
             # Siguiente turno
@@ -187,14 +186,14 @@ class Wordle(QObject):
                 self.timer.start(1000)
 
         else:
-            self.erase_word()
+            self._erase_word()
 
         self.user_word = []
 
-    def update_score(self):
+    def _update_score(self):
         self.label_score.setText(str(self.score))
 
-    def is_finish(self):
+    def _is_finish(self):
         if self.valid or self.turn == 5:
             self.timer.stop()
 
@@ -232,6 +231,6 @@ class Wordle(QObject):
         return self.finished
 
     def exit_game(self):
-        self.action_reset.triggered.disconnect(self.reset_game)
+        self.action_reset.triggered.disconnect(self._reset_game)
         self.ui_widget.removeEventFilter(self)
         self.timer.stop()

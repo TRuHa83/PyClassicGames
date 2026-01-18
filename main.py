@@ -39,35 +39,36 @@ class MainApp:
         self.about_as = Ui_AboutAs()
         self.about_as.setupUi(self.dialog)
 
-        self.setup_connections()
-        self.menu()
+        self._setup_connections()
+        self._menu()
 
         self.window.show()
 
-    def setup_connections(self):
-        self.ui.actionMenu.triggered.connect(self.menu)
+    def _setup_connections(self):
+        self.ui.actionMenu.triggered.connect(self._menu)
+        self.ui.actionScore.triggered.connect(self._score)
 
-        self.ui.actionMine.triggered.connect(self.minesweeper)
-        self.ui.actionHorse.triggered.connect(self.knightstour)
-        self.ui.actionWordle.triggered.connect(self.wordle)
+        self.ui.actionMine.triggered.connect(self._minesweeper)
+        self.ui.actionHorse.triggered.connect(self._knightstour)
+        self.ui.actionWordle.triggered.connect(self._wordle)
 
         self.ui.actionExit.triggered.connect(sys.exit)
 
-        self.ui.actionAbout.triggered.connect(self.about)
+        self.ui.actionAbout.triggered.connect(self._about)
 
-        self.ui.btn_mine.clicked.connect(self.minesweeper)
-        self.ui.btn_horse.clicked.connect(self.knightstour)
-        self.ui.btn_wordle.clicked.connect(self.wordle)
+        self.ui.btn_mine.clicked.connect(self._minesweeper)
+        self.ui.btn_horse.clicked.connect(self._knightstour)
+        self.ui.btn_wordle.clicked.connect(self._wordle)
 
-    def menu(self):
-        self.exit_games()
+    def _menu(self):
+        self._exit_games()
         self.state = SelectGame.MENU
         self.ui.menuGame.setEnabled(False)
         self.window.setWindowTitle(version.__app_name__)
         self.ui.stackedWidget.setCurrentWidget(self.ui.menu)
 
-    def minesweeper(self):
-        self.exit_games()
+    def _minesweeper(self):
+        self._exit_games()
         self.state = SelectGame.MINE
 
         self.ui.menuGame.setEnabled(True)
@@ -76,8 +77,8 @@ class MainApp:
 
         self.game_minesweeper = MinesWeeper(self.ui.mine, self.score_games)
 
-    def knightstour(self):
-        self.exit_games()
+    def _knightstour(self):
+        self._exit_games()
         self.state = SelectGame.HORSE
         self.ui.menuGame.setEnabled(True)
         self.window.setWindowTitle("Salto del Caballo")
@@ -85,8 +86,8 @@ class MainApp:
 
         self.game_knightstour = KnightsTour(self.ui.horse, self.score_games)
 
-    def wordle(self):
-        self.exit_games()
+    def _wordle(self):
+        self._exit_games()
         self.state = SelectGame.WORDLE
         self.ui.menuGame.setEnabled(True)
         self.window.setWindowTitle("Wordle")
@@ -101,7 +102,7 @@ class MainApp:
 
         self.dialog.exec()
 
-    def exit_games(self):
+    def _exit_games(self):
         if self.state == SelectGame.MINE:
             self.game_minesweeper.exit_game()
 

@@ -20,11 +20,11 @@ class MinesWeeper(QObject):
 
         self.grid_btns = [[]] # Matriz de botones
 
-        self.set_variables()
-        self.setup_connections()
-        self.gen_matriz()
+        self._set_variables()
+        self._setup_connections()
+        self._gen_matriz()
 
-    def set_variables(self):
+    def _set_variables(self):
         self.flags_remaining = self.mines
         self.real_mines = 0
         self.flags_good = 0
@@ -52,9 +52,9 @@ class MinesWeeper(QObject):
             8: "gray"
         }
 
-    def setup_connections(self):
+    def _setup_connections(self):
         # Configuramos el cronometro
-        self.timer.timeout.connect(self.clock)
+        self.timer.timeout.connect(self._clock)
 
         # Buscamos los widgets en la interfaz
         self.face_btn = self.ui_widget.findChild(QPushButton, "face_btn")
@@ -64,7 +64,7 @@ class MinesWeeper(QObject):
 
         # Configuramos el botón principal del tablero
         self.face_btn.setText(self.face[1])
-        self.face_btn.clicked.connect(self.put_flag)
+        self.face_btn.clicked.connect(self._put_flag)
 
         # Configuramos los lcd de tiempo
         self.lcd_clock.display(self.seconds)
@@ -75,7 +75,7 @@ class MinesWeeper(QObject):
         self.lcd_lags.setStyleSheet("background-color: black; color: red; border: 1px solid gray;")
 
         # Configuramos el botón de reset del menú
-        self.action_reset.triggered.connect(self.reset_game)
+        self.action_reset.triggered.connect(self._reset_game)
 
         # Definimos las conexiones para todos los botones del tablero
         for r in range(self.rows):
@@ -83,11 +83,11 @@ class MinesWeeper(QObject):
 
             for c in range(self.cols):
                 btn = self.ui_widget.findChild(QPushButton, f"btn_mine_{r}_{c}")
-                btn.clicked.connect(self.check_box)
+                btn.clicked.connect(self._check_box)
                 self.grid_btns[r].append(btn)
 
-    def reset_game(self):
-        self.set_variables()
+    def _reset_game(self):
+        self._set_variables()
 
         for r in range(self.rows):
             for c in range(self.cols):
@@ -103,9 +103,9 @@ class MinesWeeper(QObject):
         self.lcd_lags.display(self.flags_remaining)
         self.lcd_clock.display(0)
 
-        self.gen_matriz()
+        self._gen_matriz()
 
-    def clock(self):
+    def _clock(self):
         self.seconds += 1
         self.lcd_clock.display(self.seconds)
 
@@ -123,9 +123,9 @@ class MinesWeeper(QObject):
                             self.flags_good += 1
 
             self.timer.stop()
-            self.end_game(True)
+            self._end_game(True)
 
-    def gen_matriz(self):
+    def _gen_matriz(self):
         pos_mines = []
         self.pos_negbr = [
             (-1, -1), (-1, 0), (-1, 1),
@@ -158,7 +158,7 @@ class MinesWeeper(QObject):
 
         self.timer.start(1000)
 
-    def put_flag(self):
+    def _put_flag(self):
         if not self.flag:
             self.face_btn.setText("🚩")
             self.flag = True
@@ -167,7 +167,7 @@ class MinesWeeper(QObject):
         self.flag = False
         self.face_btn.setText(self.face[1])
 
-    def flag_mine(self, row, col):
+    def _flag_mine(self, row, col):
         btn = self.grid_btns[row][col]
 
         if btn.text() == "🚩":
@@ -184,19 +184,19 @@ class MinesWeeper(QObject):
 
         self.lcd_lags.display(self.flags_remaining)
 
-    def check_box(self):
+    def _check_box(self):
         sender = self.sender()
         row = int(sender.property("row"))
         col = int(sender.property("col"))
 
         if self.flag:
-            self.flag_mine(row, col)
+            self._flag_mine(row, col)
             return
 
         if self.matriz[row][col] == 0:
             sender.setEnabled(False)
             sender.setFlat(True)
-            self.uncover_zeros(row, col)
+            self._uncover_zeros(row, col)
             self.face_btn.setText(self.face[0])
 
         elif self.matriz[row][col] > 0:
@@ -226,9 +226,9 @@ class MinesWeeper(QObject):
                         btn.setText("💣")
 
             self.timer.stop()
-            self.end_game(False)
+            self._end_game(False)
 
-    def uncover_zeros(self, row, col):
+    def _uncover_zeros(self, row, col):
         queue = [(row, col)]
 
         while queue:
@@ -250,7 +250,7 @@ class MinesWeeper(QObject):
                         btn.setStyleSheet(f"color: {self.colors[int(num)]}")
                         btn.setEnabled(False)
 
-    def calculate_score(self):
+    def _calculate_score(self):
         # Multiplicador
         multiplier = 10000
 
@@ -303,5 +303,5 @@ class MinesWeeper(QObject):
             QMessageBox.critical(self.ui_widget, title, message)
 
     def exit_game(self):
-        self.action_reset.triggered.disconnect(self.reset_game)
+        self.action_reset.triggered.disconnect(self._reset_game)
         self.timer.stop()

@@ -26,11 +26,11 @@ class KnightsTour(QObject):
 
         self.grid_btns = [[]] # Matriz de botones
 
-        self.setup_connections()
+        self._setup_connections()
 
-    def setup_connections(self):
+    def _setup_connections(self):
         # Configuramos el cronometro
-        self.timer.timeout.connect(self.clock)
+        self.timer.timeout.connect(self._clock)
 
         # Configuramos el lcd de moviminetos
         self.lcd_score = self.ui_widget.findChild(QLCDNumber, "lcd_horse_score")
@@ -38,17 +38,17 @@ class KnightsTour(QObject):
 
         # Configuramos el botón de reset del menú
         self.action_reset = self.ui_widget.window().findChild(QAction, "actionReset")
-        self.action_reset.triggered.connect(self.reset_game)
+        self.action_reset.triggered.connect(self._reset_game)
 
         # Definimos las conexiones para todos los botones del tablero
         for r in range(self.rows):
             self.grid_btns.append([])
             for c in range(self.cols):
                 btn = self.ui_widget.findChild(QPushButton, f"btn_horse_{r}_{c}")
-                btn.clicked.connect(self.check_box)
+                btn.clicked.connect(self._check_box)
                 self.grid_btns[r].append(btn)
 
-    def reset_game(self):
+    def _reset_game(self):
         self.count = 0
         self.milis = 0
         self.last_pos = None
@@ -68,10 +68,10 @@ class KnightsTour(QObject):
                 elif "red" in style:
                     btn.setStyleSheet(style.replace("red", "grey"))
 
-    def clock(self):
+    def _clock(self):
         self.milis += self.timer.interval()
 
-    def check_box(self):
+    def _check_box(self):
         sender = self.sender()
         row = int(sender.property("row"))
         col = int(sender.property("col"))
@@ -80,7 +80,7 @@ class KnightsTour(QObject):
             self.timer.start(100)
 
         self.last_pos = (row, col)
-        moves = self.change_states(self.last_pos)
+        moves = self._change_states(self.last_pos)
 
         sender.setEnabled(False)
         sender.setText("🐴")
@@ -92,13 +92,13 @@ class KnightsTour(QObject):
         self.lcd_score.display(self.count)
 
         if self.count == 64:
-            self.end_game(True)
+            self._end_game(True)
             return
 
         if moves == 0:
-            self.end_game(False)
+            self._end_game(False)
 
-    def change_states(self, last_poss):
+    def _change_states(self, last_poss):
         for r in range(self.rows):
             for c in range(self.cols):
                 btn = self.grid_btns[r][c]
@@ -129,7 +129,7 @@ class KnightsTour(QObject):
 
         return len(moves)
 
-    def calculate_score(self):
+    def _calculate_score(self):
         # Multiplicador
         multiplier = 100
 
@@ -140,7 +140,7 @@ class KnightsTour(QObject):
         score = (multiplier * bonus) / self.milis
         return round(score)
 
-    def end_game(self, state):
+    def _end_game(self, state):
         self.timer.stop()
 
         score = self.calculate_score()
@@ -174,6 +174,6 @@ class KnightsTour(QObject):
             QMessageBox.critical(self.ui_widget, title, message)
 
     def exit_game(self):
-        self.action_reset.triggered.disconnect(self.reset_game)
+        self.action_reset.triggered.disconnect(self._reset_game)
         self.timer.stop()
-        self.reset_game()
+        self._reset_game()
