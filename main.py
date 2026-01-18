@@ -36,7 +36,7 @@ class MainApp:
 
         # Cargamos Acerca de..
         self.dialog = QDialog()
-        self.about_as = Ui_AboutAs()
+        self.about_as = Ui_AboutUs()
         self.about_as.setupUi(self.dialog)
 
         self._setup_connections()
