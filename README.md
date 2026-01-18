@@ -1,13 +1,12 @@
 # PyClassicGames
 
-![GUI Framework](https://img.shields.io/badge/GUI-PySide6-green?logo=qt&logoColor=white)
-![Database](https://img.shields.io/badge/Database-SQLite-sqlite?logo=sqlite&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Development-blue)
-
 ![Python Version](https://img.shields.io/badge/python-3.13-blue?logo=python&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![GUI Framework](https://img.shields.io/badge/GUI-PySide6-limne?logo=qt&logoColor=white)
+![Database](https://img.shields.io/badge/Database-SQLite-lime?logo=sqlite&logoColor=white)
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/TRuHa83/PyClassicGames?label=Versi%C3%B3n&color=blueviolet)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/TRuHa83/PyClassicGames?label=Versi%C3%B3n&color=orange)
 ![GitHub all releases](https://img.shields.io/github/downloads/TRuHa83/PyClassicGames/total?label=Descargas&color=orange)
 
 >  **Proyecto final de Desarrollo de interfaces**.<br>Una colección moderna de juegos clásicos de lógica y estrategia, desarrollada en Python con una interfaz gráfica robusta.
@@ -16,9 +15,12 @@
 
 ## Capturas de Pantalla
 
-| Menú | Buscaminas | Salto del Caballo | Wordle |
-| :---: | :---: | :---: | :---: |
-| ![Menu](images/menu.png) | ![Buscaminas](images/buscaminas.png) | ![SaltoCaballo](images/saltocaballo.png) | ![Wordle](images/wordle.png) |
+<p align="center">
+  <img src="images/menu.png" width="20%" alt="Menu" />
+  <img src="images/buscaminas.png" width="20%" alt="Buscaminas" />
+  <img src="images/saltocaballo.png" width="20%" alt="Salto del Caballo" />
+  <img src="images/wordle.png" width="20%" alt="Wordle" />
+</p>
 
 ## Descripción del Proyecto
 
@@ -102,18 +104,20 @@ Si solo quieres jugar sin configurar entornos de desarrollo:
 
 ```text
 PyClassicGames/
-├── assets/              # Imágenes, iconos y recursos
+├── assets/              # Iconos y recursos
+├── images/              # Imagenes
 │
-├── data/                # Archivo .db y diccionario
+├── data/                # diccionario
 │
 ├── games/
-│   ├── knightstour.py   # Lógica juego salto del caballo
-│   ├── minesweeper.py   # Lógica juego buscaminas
-│   └── wordle.py        # Lógica juego Wordle
+│   ├── knightstour.py   # Lógica salto del caballo
+│   ├── minesweeper.py   # Lógica buscaminas
+│   └── wordle.py        # Lógica Wordle
 │
 ├── ui/
-│   ├── MainWindow.py    # Vista menu principal 
-│   └── AboutUs.py       # Vista de Acerca de...
+│   ├── main_window.py    # Vista menu principal
+│   ├── score.py          # Vista de puntuaciones
+│   └── about_as.py       # Vista de Acerca de...
 │
 ├── modules/
 │   └── database.py      # Módulo de base de datos
