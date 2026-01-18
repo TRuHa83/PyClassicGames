@@ -6507,6 +6507,7 @@ background-color: rgb(51, 209, 122);</string>
      <string>Menu</string>
     </property>
     <addaction name="actionMenu"/>
+    <addaction name="actionScore"/>
     <addaction name="separator"/>
     <addaction name="actionMine"/>
     <addaction name="actionHorse"/>
@@ -6522,7 +6523,6 @@ background-color: rgb(51, 209, 122);</string>
      <string>Juego</string>
     </property>
     <addaction name="actionReset"/>
-    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -6582,6 +6582,16 @@ background-color: rgb(51, 209, 122);</string>
   <action name="actionDificil">
    <property name="text">
     <string>Dificil</string>
+   </property>
+  </action>
+  <action name="actionPuntuaci_n">
+   <property name="text">
+    <string>Puntuación</string>
+   </property>
+  </action>
+  <action name="actionScore">
+   <property name="text">
+    <string>Puntuación</string>
    </property>
   </action>
  </widget>

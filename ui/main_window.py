@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainWindow.ui'
+## Form generated from reading UI file 'main_window.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -49,6 +49,10 @@ class Ui_MainWindow(object):
         self.actionMedio.setObjectName(u"actionMedio")
         self.actionDificil = QAction(MainWindow)
         self.actionDificil.setObjectName(u"actionDificil")
+        self.actionPuntuaci_n = QAction(MainWindow)
+        self.actionPuntuaci_n.setObjectName(u"actionPuntuaci_n")
+        self.actionScore = QAction(MainWindow)
+        self.actionScore.setObjectName(u"actionScore")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_6 = QGridLayout(self.centralwidget)
@@ -2150,6 +2154,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuGame.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
         self.mainMenu.addAction(self.actionMenu)
+        self.mainMenu.addAction(self.actionScore)
         self.mainMenu.addSeparator()
         self.mainMenu.addAction(self.actionMine)
         self.mainMenu.addAction(self.actionHorse)
@@ -2157,7 +2162,6 @@ class Ui_MainWindow(object):
         self.mainMenu.addSeparator()
         self.mainMenu.addAction(self.actionExit)
         self.menuGame.addAction(self.actionReset)
-        self.menuGame.addSeparator()
         self.menuHelp.addAction(self.actionAbout)
 
         self.retranslateUi(MainWindow)
@@ -2181,6 +2185,8 @@ class Ui_MainWindow(object):
         self.actionFacil.setText(QCoreApplication.translate("MainWindow", u"Facil", None))
         self.actionMedio.setText(QCoreApplication.translate("MainWindow", u"Medio", None))
         self.actionDificil.setText(QCoreApplication.translate("MainWindow", u"Dificil", None))
+        self.actionPuntuaci_n.setText(QCoreApplication.translate("MainWindow", u"Puntuaci\u00f3n", None))
+        self.actionScore.setText(QCoreApplication.translate("MainWindow", u"Puntuaci\u00f3n", None))
         self.groupBox_3.setTitle("")
         self.btn_mine.setText(QCoreApplication.translate("MainWindow", u"\U0001f4a3", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Buscaminas", None))
