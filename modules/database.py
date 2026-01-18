@@ -41,6 +41,13 @@ class ScoreGames:
                 """
                 conn.execute(sql_create_table)
 
+    def get_all_score(self, game):
+        sql = f"SELECT * FROM {game} ORDER BY score DESC"
+
+        with self._connection_db() as conn:
+            result = conn.execute(sql).fetchall()
+            return result
+
     def get_best_today(self, game):
         sql = f"SELECT MAX(score) FROM {game} WHERE date(date) = date('now')"
 
