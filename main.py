@@ -1,11 +1,13 @@
 import sys
 import version
 
-from enum    import Enum, auto
-from pathlib import Path
+from enum     import Enum, auto
+from pathlib  import Path
+from datetime import datetime
 
 from custom.launch     import GameButton
 
+from modules.export    import ToPDF
 from modules.config    import Config
 from modules.update    import Update
 from modules.database  import ScoreGames
@@ -21,7 +23,7 @@ from games.knightstour import KnightsTour
 
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QDialog,
-    QTableWidgetItem, QHeaderView
+    QTableWidgetItem, QHeaderView, QFileDialog
 )
 
 
@@ -102,6 +104,8 @@ class MainApp:
         self.ui.menu.findChild(GameButton, "button_salto_del_caballo").clicked.connect(self._knightstour)
         self.ui.menu.findChild(GameButton, "button_wordle").clicked.connect(self._wordle)
 
+        self.score_ui.btn_export.clicked.connect(self._export_to_pdf)
+
     def _menu(self):
         self._exit_games()
         self.state = SelectGame.MENU
@@ -166,6 +170,26 @@ class MainApp:
                 st.setItem(i, 1, QTableWidgetItem(str(s["score"])))
 
         self.score.exec()
+
+    def _export_to_pdf(self):
+        index = self.score_ui.tabGame.currentIndex()
+        game_name = self.score_ui.tabGame.tabText(index)
+
+        # Generar nombre por defecto con fecha y nombre del juego
+        today = datetime.now().strftime("%Y%m%d_%H%M%S")
+        default_name = f"{game_name}_{today}.pdf"
+
+        # Muestra un diálogo para guardar el archivo
+        file_name, _ = QFileDialog.getSaveFileName(
+            self.score,
+            "Guardar PDF",
+            default_name,
+            "Archivos PDF (*.pdf)"
+        )
+
+        if file_name:
+            pdf_export = ToPDF(self.score_game[index], game_name, file_name)
+            pdf_export.generate()
 
     def _about(self):
         self.about_as.label_version.setText(version.__version__)

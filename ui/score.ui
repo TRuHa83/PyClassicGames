@@ -39,7 +39,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
      <item>
-      <widget class="QTabWidget" name="tabWidget">
+      <widget class="QTabWidget" name="tabGame">
        <property name="tabPosition">
         <enum>QTabWidget::TabPosition::North</enum>
        </property>
