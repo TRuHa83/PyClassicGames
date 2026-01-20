@@ -39,7 +39,7 @@ Con este proyecto demuestro capacidades de desarrollo para software de escritori
 - [x] **Arquitectura:** Separación lógica entre la interfaz (Vistas), los datos (Modelos) y la lógica de juego (Controladores).
 - [x] **Base de Datos:** Sistema persistente que almacena automáticamente las puntuaciones y fecha al finalizar cada partida.
 - [x] **Actualizaciones:** Sistema integrado que consulta el repositorio GitHub para verificar si existen nuevas versiones del software.
-- [ ] **Informes PDF:** Generación dinámica de reportes de "Salón de la Fama" utilizando la librería **ReportLab**.
+- [x] **Informes PDF:** Generación dinámica de reportes de "Salón de la Fama" utilizando la librería **ReportLab**.
 
 ---
 
@@ -105,7 +105,9 @@ PyClassicGames/
 ├── assets/              # Iconos y recursos
 ├── images/              # Imagenes
 │
-├── data/                # diccionario
+├── data/
+│   ├── words.txt        # Palabras del Wordle
+│   └── valid_words.txt  # Palabras válidas
 │
 ├── custom/
 │   └── launch.py        # Boton personalizado para lanzar juegos
@@ -117,13 +119,14 @@ PyClassicGames/
 │   └── wordle.py        # Lógica Wordle
 │
 ├── ui/
-│   ├── main_window.py    # Vista menu principal
-│   ├── score.py          # Vista de puntuaciones
-│   └── about_as.py       # Vista de Acerca de...
+│   ├── main_window.py   # Vista menu principal
+│   ├── score.py         # Vista de puntuaciones
+│   └── about_as.py      # Vista de Acerca de...
 │
 ├── modules/
-│   ├── config.py        # Módulo de configuración
 │   ├── database.py      # Módulo de base de datos
+│   ├── export.py        # Módulo de exportación a PDF
+│   ├── config.py        # Módulo de configuración
 │   └── update.py        # Módulo de actualizaciones
 │
 ├── main.py              # Punto de entrada
