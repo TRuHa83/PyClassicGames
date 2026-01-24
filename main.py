@@ -3,6 +3,8 @@ import version
 
 from enum import Enum, auto
 
+from modules.config    import Config
+from modules.update    import Update
 from modules.database  import ScoreGames
 
 from ui.score          import Ui_Score
@@ -29,12 +31,21 @@ class SelectGame(Enum):
 class MainApp:
     def __init__(self):
         self.state = None
-        self.score_games = ScoreGames()
 
         # Cargamos la interfaz
         self.window = QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)
+
+        # Cargamos las configuraciones
+        self.config = Config(self.ui)
+        self.setting = self.config.get_setting()
+        self.state_update = self.setting.get("update")
+
+        self.update = Update(self.window)
+
+        path = self.config.get_path()
+        self.score_games = ScoreGames(path)
 
         # Cargamos la puntuación
         self.score = QDialog()
@@ -51,6 +62,9 @@ class MainApp:
 
         self.window.show()
 
+        if self.state_update:
+            self.update.auto_check_update()
+
     def _setup_connections(self):
         self.ui.actionMenu.triggered.connect(self._menu)
         self.ui.actionScore.triggered.connect(self._score)
@@ -60,6 +74,9 @@ class MainApp:
         self.ui.actionWordle.triggered.connect(self._wordle)
 
         self.ui.actionExit.triggered.connect(sys.exit)
+
+        self.ui.actionCheckRun.triggered.connect(self._update_setting)
+        self.ui.actionCheckNow.triggered.connect(self.update.man_check_update)
 
         self.ui.actionAbout.triggered.connect(self._about)
 
@@ -138,6 +155,12 @@ class MainApp:
         self.about_as.label_name.setText(version.__app_name__)
 
         self.dialog.exec()
+
+    def _update_setting(self):
+        self.state_update = self.ui.actionCheckRun.isChecked()
+        setting = self.config.get_setting()
+        setting["update"] = self.state_update
+        self.config.set_setting(setting)
 
     def _exit_games(self):
         if self.state == SelectGame.MINE:
