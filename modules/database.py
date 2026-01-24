@@ -1,24 +1,10 @@
-import os
-import sys
 import sqlite3
-
-from pathlib import Path
 
 
 class ScoreGames:
-    def __init__(self, db_name="score.db"):
-        # Comprobar OS y ruta del usuario
-        if sys.platform == "win32":
-            base_path = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local"))
-
-        else:
-            base_path = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share"))
-
-        # Crear carpeta el juego
-        data_dir = base_path / "PyClassicGames"
-        data_dir.mkdir(parents=True, exist_ok=True)
-
-        self._db_path = data_dir / db_name
+    def __init__(self, path):
+        db_name="score.db"
+        self._db_path = path / db_name
         self._init_db()
 
     def _connection_db(self):
@@ -34,16 +20,16 @@ class ScoreGames:
             for game in games:
                 sql_create_table = f"""
                 CREATE TABLE IF NOT EXISTS {game} (
-                    id     INTEGER PRIMARY KEY AUTOINCREMENT,
-                    date   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    score  INTEGER NOT NULL
+                    id     INTEGER    PRIMARY KEY AUTOINCREMENT,
+                    date   TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+                    score  INTEGER    NOT NULL
                 );
                 """
                 conn.execute(sql_create_table)
 
     def get_all_score(self, game):
         sql = f"SELECT * FROM {game} ORDER BY score DESC"
-
+    
         with self._connection_db() as conn:
             result = conn.execute(sql).fetchall()
             return result
