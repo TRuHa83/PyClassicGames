@@ -53,6 +53,12 @@ class Ui_MainWindow(object):
         self.actionPuntuaci_n.setObjectName(u"actionPuntuaci_n")
         self.actionScore = QAction(MainWindow)
         self.actionScore.setObjectName(u"actionScore")
+        self.actionCheckRun = QAction(MainWindow)
+        self.actionCheckRun.setObjectName(u"actionCheckRun")
+        self.actionCheckRun.setCheckable(True)
+        self.actionCheckRun.setChecked(True)
+        self.actionCheckNow = QAction(MainWindow)
+        self.actionCheckNow.setObjectName(u"actionCheckNow")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_6 = QGridLayout(self.centralwidget)
@@ -2148,6 +2154,8 @@ class Ui_MainWindow(object):
         self.menuGame.setEnabled(True)
         self.menuHelp = QMenu(self.menuBar)
         self.menuHelp.setObjectName(u"menuHelp")
+        self.menuUpdate = QMenu(self.menuHelp)
+        self.menuUpdate.setObjectName(u"menuUpdate")
         MainWindow.setMenuBar(self.menuBar)
 
         self.menuBar.addAction(self.mainMenu.menuAction())
@@ -2162,7 +2170,11 @@ class Ui_MainWindow(object):
         self.mainMenu.addSeparator()
         self.mainMenu.addAction(self.actionExit)
         self.menuGame.addAction(self.actionReset)
+        self.menuHelp.addAction(self.menuUpdate.menuAction())
+        self.menuHelp.addSeparator()
         self.menuHelp.addAction(self.actionAbout)
+        self.menuUpdate.addAction(self.actionCheckRun)
+        self.menuUpdate.addAction(self.actionCheckNow)
 
         self.retranslateUi(MainWindow)
 
@@ -2187,6 +2199,8 @@ class Ui_MainWindow(object):
         self.actionDificil.setText(QCoreApplication.translate("MainWindow", u"Dificil", None))
         self.actionPuntuaci_n.setText(QCoreApplication.translate("MainWindow", u"Puntuaci\u00f3n", None))
         self.actionScore.setText(QCoreApplication.translate("MainWindow", u"Puntuaci\u00f3n", None))
+        self.actionCheckRun.setText(QCoreApplication.translate("MainWindow", u"Comprobar en inicio", None))
+        self.actionCheckNow.setText(QCoreApplication.translate("MainWindow", u"Comprobar ahora", None))
         self.groupBox_3.setTitle("")
         self.btn_mine.setText(QCoreApplication.translate("MainWindow", u"\U0001f4a3", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Buscaminas", None))
@@ -2858,5 +2872,6 @@ class Ui_MainWindow(object):
         self.mainMenu.setTitle(QCoreApplication.translate("MainWindow", u"Menu", None))
         self.menuGame.setTitle(QCoreApplication.translate("MainWindow", u"Juego", None))
         self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", u"Ayuda", None))
+        self.menuUpdate.setTitle(QCoreApplication.translate("MainWindow", u"Actualizaci\u00f3n", None))
     # retranslateUi
 

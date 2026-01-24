@@ -6528,6 +6528,15 @@ background-color: rgb(51, 209, 122);</string>
     <property name="title">
      <string>Ayuda</string>
     </property>
+    <widget class="QMenu" name="menuUpdate">
+     <property name="title">
+      <string>Actualización</string>
+     </property>
+     <addaction name="actionCheckRun"/>
+     <addaction name="actionCheckNow"/>
+    </widget>
+    <addaction name="menuUpdate"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="mainMenu"/>
@@ -6592,6 +6601,22 @@ background-color: rgb(51, 209, 122);</string>
   <action name="actionScore">
    <property name="text">
     <string>Puntuación</string>
+   </property>
+  </action>
+  <action name="actionCheckRun">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Comprobar en inicio</string>
+   </property>
+  </action>
+  <action name="actionCheckNow">
+   <property name="text">
+    <string>Comprobar ahora</string>
    </property>
   </action>
  </widget>
