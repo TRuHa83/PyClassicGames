@@ -103,31 +103,32 @@ class MainApp:
         self.game_wordle = Wordle(self.ui.wordle, self.score_games)
 
     def _score(self):
-        score_mine = self.score_games.get_all_score("minesweeper")
-        score_horse = self.score_games.get_all_score("knightstour")
-        score_wordle = self.score_games.get_all_score("wordle")
+        # Las pestañas de puntuaciones en una lista
+        score_tab = [
+            self.score_ui.score_mines,
+            self.score_ui.score_horse,
+            self.score_ui.score_wordle
+        ]
 
-        # Le damos el ancho maximo a la primera columna
-        self.score_ui.score_mines.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-        self.score_ui.score_horse.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-        self.score_ui.score_wordle.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        # Puntuaciones de cada juego en una lista
+        self.score_game = [
+            self.score_games.get_all_score("minesweeper"),
+            self.score_games.get_all_score("knightstour"),
+            self.score_games.get_all_score("wordle")
+        ]
 
-        # Agregamos tantas filas como entradas hay
-        self.score_ui.score_mines.setRowCount(len(score_mine))
-        self.score_ui.score_horse.setRowCount(len(score_horse))
-        self.score_ui.score_wordle.setRowCount(len(score_wordle))
+        # Iteramos cada tab con su puntuación
+        for sp, score in zip(score_tab, self.score_game):
+            # Le damos el ancho maximo a la primera columna
+            sp.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
 
-        for i, s in enumerate(score_mine):
-            self.score_ui.score_mines.setItem(i, 0, QTableWidgetItem(str(s["date"])))
-            self.score_ui.score_mines.setItem(i, 1, QTableWidgetItem(str(s["score"])))
+            # Agregamos tantas filas como entradas hay
+            sp.setRowCount(len(score))
 
-        for i, s in enumerate(score_horse):
-            self.score_ui.score_horse.setItem(i, 0, QTableWidgetItem(str(s["date"])))
-            self.score_ui.score_horse.setItem(i, 1, QTableWidgetItem(str(s["score"])))
-
-        for i, s in enumerate(score_wordle):
-            self.score_ui.score_wordle.setItem(i, 0, QTableWidgetItem(str(s["date"])))
-            self.score_ui.score_wordle.setItem(i, 1, QTableWidgetItem(str(s["score"])))
+            # Introducimos los valores en la tabla
+            for i, s in enumerate(score):
+                sp.setItem(i, 0, QTableWidgetItem(str(s["date"])))
+                sp.setItem(i, 1, QTableWidgetItem(str(s["score"])))
 
         self.score.exec()
 
