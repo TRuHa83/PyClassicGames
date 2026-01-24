@@ -12,9 +12,10 @@
 __pycache__/
 
 # User files
-data/score.db
 data/*.db-journal
 data/*.db-wal
+score.db
+config.json
 
 # OS generated files
 .DS_Store
