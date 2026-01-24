@@ -20,7 +20,8 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QGroupBox,
     QHBoxLayout, QLCDNumber, QLabel, QMainWindow,
     QMenu, QMenuBar, QPushButton, QSizePolicy,
     QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
-import recursos_rc
+import resources_rc
+import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -29,6 +30,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(400, 560)
         MainWindow.setMinimumSize(QSize(400, 560))
         MainWindow.setMaximumSize(QSize(400, 560))
+        icon = QIcon()
+        icon.addFile(u":/logo/logo_128.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        MainWindow.setWindowIcon(icon)
         self.actionAbout = QAction(MainWindow)
         self.actionAbout.setObjectName(u"actionAbout")
         self.actionMenu = QAction(MainWindow)
@@ -67,114 +71,126 @@ class Ui_MainWindow(object):
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setEnabled(True)
         self.stackedWidget.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        self.stackedWidget.setStyleSheet(u"QGroupBox {\n"
+"	border: 1px solid #99A1AF;\n"
+"	border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"	border: 0px;\n"
+"}\n"
+"")
         self.menu = QWidget()
         self.menu.setObjectName(u"menu")
         self.gridLayout_3 = QGridLayout(self.menu)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.groupBox_3 = QGroupBox(self.menu)
-        self.groupBox_3.setObjectName(u"groupBox_3")
-        self.groupBox_3.setMinimumSize(QSize(320, 160))
-        self.groupBox_3.setMaximumSize(QSize(320, 160))
-        self.verticalLayout_3 = QVBoxLayout(self.groupBox_3)
+        self.groupMine = QGroupBox(self.menu)
+        self.groupMine.setObjectName(u"groupMine")
+        self.groupMine.setMinimumSize(QSize(320, 160))
+        self.groupMine.setMaximumSize(QSize(320, 160))
+        self.verticalLayout_3 = QVBoxLayout(self.groupMine)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.btn_mine = QPushButton(self.groupBox_3)
+        self.btn_mine = QPushButton(self.groupMine)
         self.btn_mine.setObjectName(u"btn_mine")
         self.btn_mine.setMinimumSize(QSize(80, 80))
         self.btn_mine.setMaximumSize(QSize(80, 80))
-        font = QFont()
-        font.setPointSize(48)
-        font.setBold(True)
-        self.btn_mine.setFont(font)
+        self.btn_mine.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_mine.setStyleSheet(u"")
+        icon1 = QIcon()
+        icon1.addFile(u":/images/boom.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_mine.setIcon(icon1)
+        self.btn_mine.setIconSize(QSize(64, 64))
 
         self.verticalLayout_3.addWidget(self.btn_mine, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
-        self.label_3 = QLabel(self.groupBox_3)
+        self.label_3 = QLabel(self.groupMine)
         self.label_3.setObjectName(u"label_3")
-        font1 = QFont()
-        font1.setBold(True)
-        self.label_3.setFont(font1)
+        font = QFont()
+        font.setBold(True)
+        self.label_3.setFont(font)
         self.label_3.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_3.addWidget(self.label_3)
 
-        self.label = QLabel(self.groupBox_3)
+        self.label = QLabel(self.groupMine)
         self.label.setObjectName(u"label")
-        font2 = QFont()
-        font2.setPointSize(9)
-        self.label.setFont(font2)
+        font1 = QFont()
+        font1.setPointSize(9)
+        self.label.setFont(font1)
         self.label.setAlignment(Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
         self.verticalLayout_3.addWidget(self.label)
 
 
-        self.gridLayout_3.addWidget(self.groupBox_3, 0, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.groupMine, 0, 0, 1, 1)
 
-        self.groupBox_5 = QGroupBox(self.menu)
-        self.groupBox_5.setObjectName(u"groupBox_5")
-        self.groupBox_5.setMinimumSize(QSize(320, 160))
-        self.groupBox_5.setMaximumSize(QSize(320, 160))
-        self.verticalLayout_5 = QVBoxLayout(self.groupBox_5)
+        self.groupWordle = QGroupBox(self.menu)
+        self.groupWordle.setObjectName(u"groupWordle")
+        self.groupWordle.setMinimumSize(QSize(320, 160))
+        self.groupWordle.setMaximumSize(QSize(320, 160))
+        self.verticalLayout_5 = QVBoxLayout(self.groupWordle)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.btn_wordle = QPushButton(self.groupBox_5)
+        self.btn_wordle = QPushButton(self.groupWordle)
         self.btn_wordle.setObjectName(u"btn_wordle")
         self.btn_wordle.setMinimumSize(QSize(80, 80))
         self.btn_wordle.setMaximumSize(QSize(80, 80))
-        font3 = QFont()
-        font3.setFamilies([u"Noto Sans Ethiopic"])
-        font3.setPointSize(48)
-        font3.setBold(True)
-        font3.setItalic(False)
-        self.btn_wordle.setFont(font3)
-        self.btn_wordle.setStyleSheet(u"color:rgb(255, 255, 255);\n"
-"background-color: rgb(51, 209, 122);")
+        self.btn_wordle.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        icon2 = QIcon()
+        icon2.addFile(u":/images/W.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_wordle.setIcon(icon2)
+        self.btn_wordle.setIconSize(QSize(64, 64))
 
         self.verticalLayout_5.addWidget(self.btn_wordle, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
-        self.label_7 = QLabel(self.groupBox_5)
+        self.label_7 = QLabel(self.groupWordle)
         self.label_7.setObjectName(u"label_7")
-        self.label_7.setFont(font1)
+        self.label_7.setFont(font)
 
         self.verticalLayout_5.addWidget(self.label_7, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
-        self.label_5 = QLabel(self.groupBox_5)
+        self.label_5 = QLabel(self.groupWordle)
         self.label_5.setObjectName(u"label_5")
-        self.label_5.setFont(font2)
+        self.label_5.setFont(font1)
         self.label_5.setAlignment(Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
         self.verticalLayout_5.addWidget(self.label_5, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
 
-        self.gridLayout_3.addWidget(self.groupBox_5, 4, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.groupWordle, 4, 0, 1, 1)
 
-        self.groupBox_4 = QGroupBox(self.menu)
-        self.groupBox_4.setObjectName(u"groupBox_4")
-        self.groupBox_4.setMinimumSize(QSize(320, 160))
-        self.groupBox_4.setMaximumSize(QSize(320, 160))
-        self.verticalLayout_4 = QVBoxLayout(self.groupBox_4)
+        self.groupHorse = QGroupBox(self.menu)
+        self.groupHorse.setObjectName(u"groupHorse")
+        self.groupHorse.setMinimumSize(QSize(320, 160))
+        self.groupHorse.setMaximumSize(QSize(320, 160))
+        self.verticalLayout_4 = QVBoxLayout(self.groupHorse)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.btn_horse = QPushButton(self.groupBox_4)
+        self.btn_horse = QPushButton(self.groupHorse)
         self.btn_horse.setObjectName(u"btn_horse")
         self.btn_horse.setMinimumSize(QSize(80, 80))
         self.btn_horse.setMaximumSize(QSize(80, 80))
-        self.btn_horse.setFont(font)
+        self.btn_horse.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        icon3 = QIcon()
+        icon3.addFile(u":/images/horse.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_horse.setIcon(icon3)
+        self.btn_horse.setIconSize(QSize(64, 64))
 
         self.verticalLayout_4.addWidget(self.btn_horse, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
-        self.label_6 = QLabel(self.groupBox_4)
+        self.label_6 = QLabel(self.groupHorse)
         self.label_6.setObjectName(u"label_6")
-        self.label_6.setFont(font1)
+        self.label_6.setFont(font)
 
         self.verticalLayout_4.addWidget(self.label_6, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
-        self.label_4 = QLabel(self.groupBox_4)
+        self.label_4 = QLabel(self.groupHorse)
         self.label_4.setObjectName(u"label_4")
-        self.label_4.setFont(font2)
+        self.label_4.setFont(font1)
         self.label_4.setAlignment(Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
         self.verticalLayout_4.addWidget(self.label_4, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
 
-        self.gridLayout_3.addWidget(self.groupBox_4, 3, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.groupHorse, 3, 0, 1, 1)
 
         self.stackedWidget.addWidget(self.menu)
         self.mine = QWidget()
@@ -193,7 +209,7 @@ class Ui_MainWindow(object):
         self.lcd_lags.setObjectName(u"lcd_lags")
         self.lcd_lags.setMinimumSize(QSize(80, 40))
         self.lcd_lags.setMaximumSize(QSize(80, 40))
-        self.lcd_lags.setFont(font1)
+        self.lcd_lags.setFont(font)
         self.lcd_lags.setDigitCount(4)
         self.lcd_lags.setSegmentStyle(QLCDNumber.SegmentStyle.Flat)
 
@@ -207,9 +223,9 @@ class Ui_MainWindow(object):
         self.face_btn.setObjectName(u"face_btn")
         self.face_btn.setMinimumSize(QSize(40, 40))
         self.face_btn.setMaximumSize(QSize(40, 40))
-        font4 = QFont()
-        font4.setPointSize(16)
-        self.face_btn.setFont(font4)
+        font2 = QFont()
+        font2.setPointSize(16)
+        self.face_btn.setFont(font2)
 
         self.horizontalLayout.addWidget(self.face_btn, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
@@ -221,7 +237,7 @@ class Ui_MainWindow(object):
         self.lcd_clock.setObjectName(u"lcd_clock")
         self.lcd_clock.setMinimumSize(QSize(80, 40))
         self.lcd_clock.setMaximumSize(QSize(80, 40))
-        self.lcd_clock.setFont(font1)
+        self.lcd_clock.setFont(font)
         self.lcd_clock.setFrameShape(QFrame.Shape.Box)
         self.lcd_clock.setFrameShadow(QFrame.Shadow.Sunken)
         self.lcd_clock.setDigitCount(4)
@@ -1155,10 +1171,10 @@ class Ui_MainWindow(object):
         self.btn_horse_0_4.setObjectName(u"btn_horse_0_4")
         self.btn_horse_0_4.setMinimumSize(QSize(40, 40))
         self.btn_horse_0_4.setMaximumSize(QSize(40, 40))
-        font5 = QFont()
-        font5.setPointSize(24)
-        font5.setBold(True)
-        self.btn_horse_0_4.setFont(font5)
+        font3 = QFont()
+        font3.setPointSize(24)
+        font3.setBold(True)
+        self.btn_horse_0_4.setFont(font3)
         self.btn_horse_0_4.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_0_4, 0, 4, 1, 1)
@@ -1167,7 +1183,7 @@ class Ui_MainWindow(object):
         self.btn_horse_3_3.setObjectName(u"btn_horse_3_3")
         self.btn_horse_3_3.setMinimumSize(QSize(40, 40))
         self.btn_horse_3_3.setMaximumSize(QSize(40, 40))
-        self.btn_horse_3_3.setFont(font5)
+        self.btn_horse_3_3.setFont(font3)
         self.btn_horse_3_3.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_3_3, 3, 3, 1, 1)
@@ -1176,7 +1192,7 @@ class Ui_MainWindow(object):
         self.btn_horse_2_3.setObjectName(u"btn_horse_2_3")
         self.btn_horse_2_3.setMinimumSize(QSize(40, 40))
         self.btn_horse_2_3.setMaximumSize(QSize(40, 40))
-        self.btn_horse_2_3.setFont(font5)
+        self.btn_horse_2_3.setFont(font3)
         self.btn_horse_2_3.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_2_3, 2, 3, 1, 1)
@@ -1185,7 +1201,7 @@ class Ui_MainWindow(object):
         self.btn_horse_0_3.setObjectName(u"btn_horse_0_3")
         self.btn_horse_0_3.setMinimumSize(QSize(40, 40))
         self.btn_horse_0_3.setMaximumSize(QSize(40, 40))
-        self.btn_horse_0_3.setFont(font5)
+        self.btn_horse_0_3.setFont(font3)
         self.btn_horse_0_3.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_0_3, 0, 3, 1, 1)
@@ -1194,7 +1210,7 @@ class Ui_MainWindow(object):
         self.btn_horse_4_1.setObjectName(u"btn_horse_4_1")
         self.btn_horse_4_1.setMinimumSize(QSize(40, 40))
         self.btn_horse_4_1.setMaximumSize(QSize(40, 40))
-        self.btn_horse_4_1.setFont(font5)
+        self.btn_horse_4_1.setFont(font3)
         self.btn_horse_4_1.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_4_1, 4, 1, 1, 1)
@@ -1203,7 +1219,7 @@ class Ui_MainWindow(object):
         self.btn_horse_5_6.setObjectName(u"btn_horse_5_6")
         self.btn_horse_5_6.setMinimumSize(QSize(40, 40))
         self.btn_horse_5_6.setMaximumSize(QSize(40, 40))
-        self.btn_horse_5_6.setFont(font5)
+        self.btn_horse_5_6.setFont(font3)
         self.btn_horse_5_6.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_5_6, 5, 6, 1, 1)
@@ -1212,7 +1228,7 @@ class Ui_MainWindow(object):
         self.btn_horse_7_6.setObjectName(u"btn_horse_7_6")
         self.btn_horse_7_6.setMinimumSize(QSize(40, 40))
         self.btn_horse_7_6.setMaximumSize(QSize(40, 40))
-        self.btn_horse_7_6.setFont(font5)
+        self.btn_horse_7_6.setFont(font3)
         self.btn_horse_7_6.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_7_6, 7, 6, 1, 1)
@@ -1221,7 +1237,7 @@ class Ui_MainWindow(object):
         self.btn_horse_3_0.setObjectName(u"btn_horse_3_0")
         self.btn_horse_3_0.setMinimumSize(QSize(40, 40))
         self.btn_horse_3_0.setMaximumSize(QSize(40, 40))
-        self.btn_horse_3_0.setFont(font5)
+        self.btn_horse_3_0.setFont(font3)
         self.btn_horse_3_0.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_3_0, 3, 0, 1, 1)
@@ -1230,7 +1246,7 @@ class Ui_MainWindow(object):
         self.btn_horse_4_7.setObjectName(u"btn_horse_4_7")
         self.btn_horse_4_7.setMinimumSize(QSize(40, 40))
         self.btn_horse_4_7.setMaximumSize(QSize(40, 40))
-        self.btn_horse_4_7.setFont(font5)
+        self.btn_horse_4_7.setFont(font3)
         self.btn_horse_4_7.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_4_7, 4, 7, 1, 1)
@@ -1239,7 +1255,7 @@ class Ui_MainWindow(object):
         self.btn_horse_4_5.setObjectName(u"btn_horse_4_5")
         self.btn_horse_4_5.setMinimumSize(QSize(40, 40))
         self.btn_horse_4_5.setMaximumSize(QSize(40, 40))
-        self.btn_horse_4_5.setFont(font5)
+        self.btn_horse_4_5.setFont(font3)
         self.btn_horse_4_5.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_4_5, 4, 5, 1, 1)
@@ -1248,7 +1264,7 @@ class Ui_MainWindow(object):
         self.btn_horse_2_0.setObjectName(u"btn_horse_2_0")
         self.btn_horse_2_0.setMinimumSize(QSize(40, 40))
         self.btn_horse_2_0.setMaximumSize(QSize(40, 40))
-        self.btn_horse_2_0.setFont(font5)
+        self.btn_horse_2_0.setFont(font3)
         self.btn_horse_2_0.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_2_0, 2, 0, 1, 1)
@@ -1257,7 +1273,7 @@ class Ui_MainWindow(object):
         self.btn_horse_6_4.setObjectName(u"btn_horse_6_4")
         self.btn_horse_6_4.setMinimumSize(QSize(40, 40))
         self.btn_horse_6_4.setMaximumSize(QSize(40, 40))
-        self.btn_horse_6_4.setFont(font5)
+        self.btn_horse_6_4.setFont(font3)
         self.btn_horse_6_4.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_6_4, 6, 4, 1, 1)
@@ -1266,7 +1282,7 @@ class Ui_MainWindow(object):
         self.btn_horse_2_7.setObjectName(u"btn_horse_2_7")
         self.btn_horse_2_7.setMinimumSize(QSize(40, 40))
         self.btn_horse_2_7.setMaximumSize(QSize(40, 40))
-        self.btn_horse_2_7.setFont(font5)
+        self.btn_horse_2_7.setFont(font3)
         self.btn_horse_2_7.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_2_7, 2, 7, 1, 1)
@@ -1275,7 +1291,7 @@ class Ui_MainWindow(object):
         self.btn_horse_5_4.setObjectName(u"btn_horse_5_4")
         self.btn_horse_5_4.setMinimumSize(QSize(40, 40))
         self.btn_horse_5_4.setMaximumSize(QSize(40, 40))
-        self.btn_horse_5_4.setFont(font5)
+        self.btn_horse_5_4.setFont(font3)
         self.btn_horse_5_4.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_5_4, 5, 4, 1, 1)
@@ -1284,7 +1300,7 @@ class Ui_MainWindow(object):
         self.btn_horse_6_7.setObjectName(u"btn_horse_6_7")
         self.btn_horse_6_7.setMinimumSize(QSize(40, 40))
         self.btn_horse_6_7.setMaximumSize(QSize(40, 40))
-        self.btn_horse_6_7.setFont(font5)
+        self.btn_horse_6_7.setFont(font3)
         self.btn_horse_6_7.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_6_7, 6, 7, 1, 1)
@@ -1293,7 +1309,7 @@ class Ui_MainWindow(object):
         self.btn_horse_1_3.setObjectName(u"btn_horse_1_3")
         self.btn_horse_1_3.setMinimumSize(QSize(40, 40))
         self.btn_horse_1_3.setMaximumSize(QSize(40, 40))
-        self.btn_horse_1_3.setFont(font5)
+        self.btn_horse_1_3.setFont(font3)
         self.btn_horse_1_3.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_1_3, 1, 3, 1, 1)
@@ -1302,7 +1318,7 @@ class Ui_MainWindow(object):
         self.btn_horse_6_1.setObjectName(u"btn_horse_6_1")
         self.btn_horse_6_1.setMinimumSize(QSize(40, 40))
         self.btn_horse_6_1.setMaximumSize(QSize(40, 40))
-        self.btn_horse_6_1.setFont(font5)
+        self.btn_horse_6_1.setFont(font3)
         self.btn_horse_6_1.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_6_1, 6, 1, 1, 1)
@@ -1311,7 +1327,7 @@ class Ui_MainWindow(object):
         self.btn_horse_2_4.setObjectName(u"btn_horse_2_4")
         self.btn_horse_2_4.setMinimumSize(QSize(40, 40))
         self.btn_horse_2_4.setMaximumSize(QSize(40, 40))
-        self.btn_horse_2_4.setFont(font5)
+        self.btn_horse_2_4.setFont(font3)
         self.btn_horse_2_4.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_2_4, 2, 4, 1, 1)
@@ -1320,7 +1336,7 @@ class Ui_MainWindow(object):
         self.btn_horse_0_0.setObjectName(u"btn_horse_0_0")
         self.btn_horse_0_0.setMinimumSize(QSize(40, 40))
         self.btn_horse_0_0.setMaximumSize(QSize(40, 40))
-        self.btn_horse_0_0.setFont(font5)
+        self.btn_horse_0_0.setFont(font3)
         self.btn_horse_0_0.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_0_0, 0, 0, 1, 1)
@@ -1329,7 +1345,7 @@ class Ui_MainWindow(object):
         self.btn_horse_7_7.setObjectName(u"btn_horse_7_7")
         self.btn_horse_7_7.setMinimumSize(QSize(40, 40))
         self.btn_horse_7_7.setMaximumSize(QSize(40, 40))
-        self.btn_horse_7_7.setFont(font5)
+        self.btn_horse_7_7.setFont(font3)
         self.btn_horse_7_7.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_7_7, 7, 7, 1, 1)
@@ -1338,7 +1354,7 @@ class Ui_MainWindow(object):
         self.btn_horse_7_2.setObjectName(u"btn_horse_7_2")
         self.btn_horse_7_2.setMinimumSize(QSize(40, 40))
         self.btn_horse_7_2.setMaximumSize(QSize(40, 40))
-        self.btn_horse_7_2.setFont(font5)
+        self.btn_horse_7_2.setFont(font3)
         self.btn_horse_7_2.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_7_2, 7, 2, 1, 1)
@@ -1347,7 +1363,7 @@ class Ui_MainWindow(object):
         self.btn_horse_5_0.setObjectName(u"btn_horse_5_0")
         self.btn_horse_5_0.setMinimumSize(QSize(40, 40))
         self.btn_horse_5_0.setMaximumSize(QSize(40, 40))
-        self.btn_horse_5_0.setFont(font5)
+        self.btn_horse_5_0.setFont(font3)
         self.btn_horse_5_0.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_5_0, 5, 0, 1, 1)
@@ -1356,7 +1372,7 @@ class Ui_MainWindow(object):
         self.btn_horse_5_1.setObjectName(u"btn_horse_5_1")
         self.btn_horse_5_1.setMinimumSize(QSize(40, 40))
         self.btn_horse_5_1.setMaximumSize(QSize(40, 40))
-        self.btn_horse_5_1.setFont(font5)
+        self.btn_horse_5_1.setFont(font3)
         self.btn_horse_5_1.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_5_1, 5, 1, 1, 1)
@@ -1365,7 +1381,7 @@ class Ui_MainWindow(object):
         self.btn_horse_6_2.setObjectName(u"btn_horse_6_2")
         self.btn_horse_6_2.setMinimumSize(QSize(40, 40))
         self.btn_horse_6_2.setMaximumSize(QSize(40, 40))
-        self.btn_horse_6_2.setFont(font5)
+        self.btn_horse_6_2.setFont(font3)
         self.btn_horse_6_2.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_6_2, 6, 2, 1, 1)
@@ -1374,7 +1390,7 @@ class Ui_MainWindow(object):
         self.btn_horse_0_1.setObjectName(u"btn_horse_0_1")
         self.btn_horse_0_1.setMinimumSize(QSize(40, 40))
         self.btn_horse_0_1.setMaximumSize(QSize(40, 40))
-        self.btn_horse_0_1.setFont(font5)
+        self.btn_horse_0_1.setFont(font3)
         self.btn_horse_0_1.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_0_1, 0, 1, 1, 1)
@@ -1383,7 +1399,7 @@ class Ui_MainWindow(object):
         self.btn_horse_7_0.setObjectName(u"btn_horse_7_0")
         self.btn_horse_7_0.setMinimumSize(QSize(40, 40))
         self.btn_horse_7_0.setMaximumSize(QSize(40, 40))
-        self.btn_horse_7_0.setFont(font5)
+        self.btn_horse_7_0.setFont(font3)
         self.btn_horse_7_0.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_7_0, 7, 0, 1, 1)
@@ -1392,7 +1408,7 @@ class Ui_MainWindow(object):
         self.btn_horse_6_5.setObjectName(u"btn_horse_6_5")
         self.btn_horse_6_5.setMinimumSize(QSize(40, 40))
         self.btn_horse_6_5.setMaximumSize(QSize(40, 40))
-        self.btn_horse_6_5.setFont(font5)
+        self.btn_horse_6_5.setFont(font3)
         self.btn_horse_6_5.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_6_5, 6, 5, 1, 1)
@@ -1401,7 +1417,7 @@ class Ui_MainWindow(object):
         self.btn_horse_0_6.setObjectName(u"btn_horse_0_6")
         self.btn_horse_0_6.setMinimumSize(QSize(40, 40))
         self.btn_horse_0_6.setMaximumSize(QSize(40, 40))
-        self.btn_horse_0_6.setFont(font5)
+        self.btn_horse_0_6.setFont(font3)
         self.btn_horse_0_6.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_0_6, 0, 6, 1, 1)
@@ -1410,7 +1426,7 @@ class Ui_MainWindow(object):
         self.btn_horse_0_7.setObjectName(u"btn_horse_0_7")
         self.btn_horse_0_7.setMinimumSize(QSize(40, 40))
         self.btn_horse_0_7.setMaximumSize(QSize(40, 40))
-        self.btn_horse_0_7.setFont(font5)
+        self.btn_horse_0_7.setFont(font3)
         self.btn_horse_0_7.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_0_7, 0, 7, 1, 1)
@@ -1419,7 +1435,7 @@ class Ui_MainWindow(object):
         self.btn_horse_2_1.setObjectName(u"btn_horse_2_1")
         self.btn_horse_2_1.setMinimumSize(QSize(40, 40))
         self.btn_horse_2_1.setMaximumSize(QSize(40, 40))
-        self.btn_horse_2_1.setFont(font5)
+        self.btn_horse_2_1.setFont(font3)
         self.btn_horse_2_1.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_2_1, 2, 1, 1, 1)
@@ -1428,7 +1444,7 @@ class Ui_MainWindow(object):
         self.btn_horse_1_7.setObjectName(u"btn_horse_1_7")
         self.btn_horse_1_7.setMinimumSize(QSize(40, 40))
         self.btn_horse_1_7.setMaximumSize(QSize(40, 40))
-        self.btn_horse_1_7.setFont(font5)
+        self.btn_horse_1_7.setFont(font3)
         self.btn_horse_1_7.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_1_7, 1, 7, 1, 1)
@@ -1437,7 +1453,7 @@ class Ui_MainWindow(object):
         self.btn_horse_3_1.setObjectName(u"btn_horse_3_1")
         self.btn_horse_3_1.setMinimumSize(QSize(40, 40))
         self.btn_horse_3_1.setMaximumSize(QSize(40, 40))
-        self.btn_horse_3_1.setFont(font5)
+        self.btn_horse_3_1.setFont(font3)
         self.btn_horse_3_1.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_3_1, 3, 1, 1, 1)
@@ -1446,7 +1462,7 @@ class Ui_MainWindow(object):
         self.btn_horse_5_7.setObjectName(u"btn_horse_5_7")
         self.btn_horse_5_7.setMinimumSize(QSize(40, 40))
         self.btn_horse_5_7.setMaximumSize(QSize(40, 40))
-        self.btn_horse_5_7.setFont(font5)
+        self.btn_horse_5_7.setFont(font3)
         self.btn_horse_5_7.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_5_7, 5, 7, 1, 1)
@@ -1455,7 +1471,7 @@ class Ui_MainWindow(object):
         self.btn_horse_6_3.setObjectName(u"btn_horse_6_3")
         self.btn_horse_6_3.setMinimumSize(QSize(40, 40))
         self.btn_horse_6_3.setMaximumSize(QSize(40, 40))
-        self.btn_horse_6_3.setFont(font5)
+        self.btn_horse_6_3.setFont(font3)
         self.btn_horse_6_3.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_6_3, 6, 3, 1, 1)
@@ -1464,7 +1480,7 @@ class Ui_MainWindow(object):
         self.btn_horse_5_3.setObjectName(u"btn_horse_5_3")
         self.btn_horse_5_3.setMinimumSize(QSize(40, 40))
         self.btn_horse_5_3.setMaximumSize(QSize(40, 40))
-        self.btn_horse_5_3.setFont(font5)
+        self.btn_horse_5_3.setFont(font3)
         self.btn_horse_5_3.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_5_3, 5, 3, 1, 1)
@@ -1473,7 +1489,7 @@ class Ui_MainWindow(object):
         self.btn_horse_5_2.setObjectName(u"btn_horse_5_2")
         self.btn_horse_5_2.setMinimumSize(QSize(40, 40))
         self.btn_horse_5_2.setMaximumSize(QSize(40, 40))
-        self.btn_horse_5_2.setFont(font5)
+        self.btn_horse_5_2.setFont(font3)
         self.btn_horse_5_2.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_5_2, 5, 2, 1, 1)
@@ -1482,7 +1498,7 @@ class Ui_MainWindow(object):
         self.btn_horse_3_2.setObjectName(u"btn_horse_3_2")
         self.btn_horse_3_2.setMinimumSize(QSize(40, 40))
         self.btn_horse_3_2.setMaximumSize(QSize(40, 40))
-        self.btn_horse_3_2.setFont(font5)
+        self.btn_horse_3_2.setFont(font3)
         self.btn_horse_3_2.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_3_2, 3, 2, 1, 1)
@@ -1491,7 +1507,7 @@ class Ui_MainWindow(object):
         self.btn_horse_4_0.setObjectName(u"btn_horse_4_0")
         self.btn_horse_4_0.setMinimumSize(QSize(40, 40))
         self.btn_horse_4_0.setMaximumSize(QSize(40, 40))
-        self.btn_horse_4_0.setFont(font5)
+        self.btn_horse_4_0.setFont(font3)
         self.btn_horse_4_0.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_4_0, 4, 0, 1, 1)
@@ -1500,7 +1516,7 @@ class Ui_MainWindow(object):
         self.btn_horse_4_2.setObjectName(u"btn_horse_4_2")
         self.btn_horse_4_2.setMinimumSize(QSize(40, 40))
         self.btn_horse_4_2.setMaximumSize(QSize(40, 40))
-        self.btn_horse_4_2.setFont(font5)
+        self.btn_horse_4_2.setFont(font3)
         self.btn_horse_4_2.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_4_2, 4, 2, 1, 1)
@@ -1509,7 +1525,7 @@ class Ui_MainWindow(object):
         self.btn_horse_7_3.setObjectName(u"btn_horse_7_3")
         self.btn_horse_7_3.setMinimumSize(QSize(40, 40))
         self.btn_horse_7_3.setMaximumSize(QSize(40, 40))
-        self.btn_horse_7_3.setFont(font5)
+        self.btn_horse_7_3.setFont(font3)
         self.btn_horse_7_3.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_7_3, 7, 3, 1, 1)
@@ -1518,7 +1534,7 @@ class Ui_MainWindow(object):
         self.btn_horse_1_4.setObjectName(u"btn_horse_1_4")
         self.btn_horse_1_4.setMinimumSize(QSize(40, 40))
         self.btn_horse_1_4.setMaximumSize(QSize(40, 40))
-        self.btn_horse_1_4.setFont(font5)
+        self.btn_horse_1_4.setFont(font3)
         self.btn_horse_1_4.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_1_4, 1, 4, 1, 1)
@@ -1527,7 +1543,7 @@ class Ui_MainWindow(object):
         self.btn_horse_6_0.setObjectName(u"btn_horse_6_0")
         self.btn_horse_6_0.setMinimumSize(QSize(40, 40))
         self.btn_horse_6_0.setMaximumSize(QSize(40, 40))
-        self.btn_horse_6_0.setFont(font5)
+        self.btn_horse_6_0.setFont(font3)
         self.btn_horse_6_0.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_6_0, 6, 0, 1, 1)
@@ -1536,7 +1552,7 @@ class Ui_MainWindow(object):
         self.btn_horse_2_2.setObjectName(u"btn_horse_2_2")
         self.btn_horse_2_2.setMinimumSize(QSize(40, 40))
         self.btn_horse_2_2.setMaximumSize(QSize(40, 40))
-        self.btn_horse_2_2.setFont(font5)
+        self.btn_horse_2_2.setFont(font3)
         self.btn_horse_2_2.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_2_2, 2, 2, 1, 1)
@@ -1545,7 +1561,7 @@ class Ui_MainWindow(object):
         self.btn_horse_3_6.setObjectName(u"btn_horse_3_6")
         self.btn_horse_3_6.setMinimumSize(QSize(40, 40))
         self.btn_horse_3_6.setMaximumSize(QSize(40, 40))
-        self.btn_horse_3_6.setFont(font5)
+        self.btn_horse_3_6.setFont(font3)
         self.btn_horse_3_6.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_3_6, 3, 6, 1, 1)
@@ -1554,7 +1570,7 @@ class Ui_MainWindow(object):
         self.btn_horse_1_6.setObjectName(u"btn_horse_1_6")
         self.btn_horse_1_6.setMinimumSize(QSize(40, 40))
         self.btn_horse_1_6.setMaximumSize(QSize(40, 40))
-        self.btn_horse_1_6.setFont(font5)
+        self.btn_horse_1_6.setFont(font3)
         self.btn_horse_1_6.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_1_6, 1, 6, 1, 1)
@@ -1563,7 +1579,7 @@ class Ui_MainWindow(object):
         self.btn_horse_2_6.setObjectName(u"btn_horse_2_6")
         self.btn_horse_2_6.setMinimumSize(QSize(40, 40))
         self.btn_horse_2_6.setMaximumSize(QSize(40, 40))
-        self.btn_horse_2_6.setFont(font5)
+        self.btn_horse_2_6.setFont(font3)
         self.btn_horse_2_6.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_2_6, 2, 6, 1, 1)
@@ -1572,7 +1588,7 @@ class Ui_MainWindow(object):
         self.btn_horse_7_5.setObjectName(u"btn_horse_7_5")
         self.btn_horse_7_5.setMinimumSize(QSize(40, 40))
         self.btn_horse_7_5.setMaximumSize(QSize(40, 40))
-        self.btn_horse_7_5.setFont(font5)
+        self.btn_horse_7_5.setFont(font3)
         self.btn_horse_7_5.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_7_5, 7, 5, 1, 1)
@@ -1581,7 +1597,7 @@ class Ui_MainWindow(object):
         self.btn_horse_7_1.setObjectName(u"btn_horse_7_1")
         self.btn_horse_7_1.setMinimumSize(QSize(40, 40))
         self.btn_horse_7_1.setMaximumSize(QSize(40, 40))
-        self.btn_horse_7_1.setFont(font5)
+        self.btn_horse_7_1.setFont(font3)
         self.btn_horse_7_1.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_7_1, 7, 1, 1, 1)
@@ -1590,7 +1606,7 @@ class Ui_MainWindow(object):
         self.btn_horse_4_4.setObjectName(u"btn_horse_4_4")
         self.btn_horse_4_4.setMinimumSize(QSize(40, 40))
         self.btn_horse_4_4.setMaximumSize(QSize(40, 40))
-        self.btn_horse_4_4.setFont(font5)
+        self.btn_horse_4_4.setFont(font3)
         self.btn_horse_4_4.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_4_4, 4, 4, 1, 1)
@@ -1599,7 +1615,7 @@ class Ui_MainWindow(object):
         self.btn_horse_4_3.setObjectName(u"btn_horse_4_3")
         self.btn_horse_4_3.setMinimumSize(QSize(40, 40))
         self.btn_horse_4_3.setMaximumSize(QSize(40, 40))
-        self.btn_horse_4_3.setFont(font5)
+        self.btn_horse_4_3.setFont(font3)
         self.btn_horse_4_3.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_4_3, 4, 3, 1, 1)
@@ -1608,7 +1624,7 @@ class Ui_MainWindow(object):
         self.btn_horse_3_5.setObjectName(u"btn_horse_3_5")
         self.btn_horse_3_5.setMinimumSize(QSize(40, 40))
         self.btn_horse_3_5.setMaximumSize(QSize(40, 40))
-        self.btn_horse_3_5.setFont(font5)
+        self.btn_horse_3_5.setFont(font3)
         self.btn_horse_3_5.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_3_5, 3, 5, 1, 1)
@@ -1617,7 +1633,7 @@ class Ui_MainWindow(object):
         self.btn_horse_5_5.setObjectName(u"btn_horse_5_5")
         self.btn_horse_5_5.setMinimumSize(QSize(40, 40))
         self.btn_horse_5_5.setMaximumSize(QSize(40, 40))
-        self.btn_horse_5_5.setFont(font5)
+        self.btn_horse_5_5.setFont(font3)
         self.btn_horse_5_5.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_5_5, 5, 5, 1, 1)
@@ -1626,7 +1642,7 @@ class Ui_MainWindow(object):
         self.btn_horse_1_2.setObjectName(u"btn_horse_1_2")
         self.btn_horse_1_2.setMinimumSize(QSize(40, 40))
         self.btn_horse_1_2.setMaximumSize(QSize(40, 40))
-        self.btn_horse_1_2.setFont(font5)
+        self.btn_horse_1_2.setFont(font3)
         self.btn_horse_1_2.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_1_2, 1, 2, 1, 1)
@@ -1635,7 +1651,7 @@ class Ui_MainWindow(object):
         self.btn_horse_3_7.setObjectName(u"btn_horse_3_7")
         self.btn_horse_3_7.setMinimumSize(QSize(40, 40))
         self.btn_horse_3_7.setMaximumSize(QSize(40, 40))
-        self.btn_horse_3_7.setFont(font5)
+        self.btn_horse_3_7.setFont(font3)
         self.btn_horse_3_7.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_3_7, 3, 7, 1, 1)
@@ -1644,7 +1660,7 @@ class Ui_MainWindow(object):
         self.btn_horse_1_5.setObjectName(u"btn_horse_1_5")
         self.btn_horse_1_5.setMinimumSize(QSize(40, 40))
         self.btn_horse_1_5.setMaximumSize(QSize(40, 40))
-        self.btn_horse_1_5.setFont(font5)
+        self.btn_horse_1_5.setFont(font3)
         self.btn_horse_1_5.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_1_5, 1, 5, 1, 1)
@@ -1653,7 +1669,7 @@ class Ui_MainWindow(object):
         self.btn_horse_4_6.setObjectName(u"btn_horse_4_6")
         self.btn_horse_4_6.setMinimumSize(QSize(40, 40))
         self.btn_horse_4_6.setMaximumSize(QSize(40, 40))
-        self.btn_horse_4_6.setFont(font5)
+        self.btn_horse_4_6.setFont(font3)
         self.btn_horse_4_6.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_4_6, 4, 6, 1, 1)
@@ -1662,7 +1678,7 @@ class Ui_MainWindow(object):
         self.btn_horse_0_5.setObjectName(u"btn_horse_0_5")
         self.btn_horse_0_5.setMinimumSize(QSize(40, 40))
         self.btn_horse_0_5.setMaximumSize(QSize(40, 40))
-        self.btn_horse_0_5.setFont(font5)
+        self.btn_horse_0_5.setFont(font3)
         self.btn_horse_0_5.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_0_5, 0, 5, 1, 1)
@@ -1671,7 +1687,7 @@ class Ui_MainWindow(object):
         self.btn_horse_1_1.setObjectName(u"btn_horse_1_1")
         self.btn_horse_1_1.setMinimumSize(QSize(40, 40))
         self.btn_horse_1_1.setMaximumSize(QSize(40, 40))
-        self.btn_horse_1_1.setFont(font5)
+        self.btn_horse_1_1.setFont(font3)
         self.btn_horse_1_1.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_1_1, 1, 1, 1, 1)
@@ -1680,7 +1696,7 @@ class Ui_MainWindow(object):
         self.btn_horse_1_0.setObjectName(u"btn_horse_1_0")
         self.btn_horse_1_0.setMinimumSize(QSize(40, 40))
         self.btn_horse_1_0.setMaximumSize(QSize(40, 40))
-        self.btn_horse_1_0.setFont(font5)
+        self.btn_horse_1_0.setFont(font3)
         self.btn_horse_1_0.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_1_0, 1, 0, 1, 1)
@@ -1689,7 +1705,7 @@ class Ui_MainWindow(object):
         self.btn_horse_2_5.setObjectName(u"btn_horse_2_5")
         self.btn_horse_2_5.setMinimumSize(QSize(40, 40))
         self.btn_horse_2_5.setMaximumSize(QSize(40, 40))
-        self.btn_horse_2_5.setFont(font5)
+        self.btn_horse_2_5.setFont(font3)
         self.btn_horse_2_5.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_2_5, 2, 5, 1, 1)
@@ -1698,7 +1714,7 @@ class Ui_MainWindow(object):
         self.btn_horse_0_2.setObjectName(u"btn_horse_0_2")
         self.btn_horse_0_2.setMinimumSize(QSize(40, 40))
         self.btn_horse_0_2.setMaximumSize(QSize(40, 40))
-        self.btn_horse_0_2.setFont(font5)
+        self.btn_horse_0_2.setFont(font3)
         self.btn_horse_0_2.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_0_2, 0, 2, 1, 1)
@@ -1707,7 +1723,7 @@ class Ui_MainWindow(object):
         self.btn_horse_7_4.setObjectName(u"btn_horse_7_4")
         self.btn_horse_7_4.setMinimumSize(QSize(40, 40))
         self.btn_horse_7_4.setMaximumSize(QSize(40, 40))
-        self.btn_horse_7_4.setFont(font5)
+        self.btn_horse_7_4.setFont(font3)
         self.btn_horse_7_4.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_7_4, 7, 4, 1, 1)
@@ -1716,7 +1732,7 @@ class Ui_MainWindow(object):
         self.btn_horse_3_4.setObjectName(u"btn_horse_3_4")
         self.btn_horse_3_4.setMinimumSize(QSize(40, 40))
         self.btn_horse_3_4.setMaximumSize(QSize(40, 40))
-        self.btn_horse_3_4.setFont(font5)
+        self.btn_horse_3_4.setFont(font3)
         self.btn_horse_3_4.setStyleSheet(u"background-color: rgb(192, 191, 188); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_3_4, 3, 4, 1, 1)
@@ -1725,7 +1741,7 @@ class Ui_MainWindow(object):
         self.btn_horse_6_6.setObjectName(u"btn_horse_6_6")
         self.btn_horse_6_6.setMinimumSize(QSize(40, 40))
         self.btn_horse_6_6.setMaximumSize(QSize(40, 40))
-        self.btn_horse_6_6.setFont(font5)
+        self.btn_horse_6_6.setFont(font3)
         self.btn_horse_6_6.setStyleSheet(u"background-color: rgb(255, 255, 255); border:  1px solid grey")
 
         self.gridLayout_2.addWidget(self.btn_horse_6_6, 6, 6, 1, 1)
@@ -1751,17 +1767,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.label_9 = QLabel(self.groupBox_6)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font5)
+        self.label_9.setFont(font3)
         self.label_9.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.horizontalLayout_3.addWidget(self.label_9)
 
         self.label_score = QLabel(self.groupBox_6)
         self.label_score.setObjectName(u"label_score")
-        font6 = QFont()
-        font6.setPointSize(14)
-        font6.setBold(True)
-        self.label_score.setFont(font6)
+        font4 = QFont()
+        font4.setPointSize(14)
+        font4.setBold(True)
+        self.label_score.setFont(font4)
         self.label_score.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
 
         self.horizontalLayout_3.addWidget(self.label_score)
@@ -1778,7 +1794,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_4_1.setEnabled(False)
         self.btn_wordle_4_1.setMinimumSize(QSize(50, 50))
         self.btn_wordle_4_1.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_4_1.setFont(font5)
+        self.btn_wordle_4_1.setFont(font3)
         self.btn_wordle_4_1.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1790,7 +1806,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_2_0.setEnabled(False)
         self.btn_wordle_2_0.setMinimumSize(QSize(50, 50))
         self.btn_wordle_2_0.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_2_0.setFont(font5)
+        self.btn_wordle_2_0.setFont(font3)
         self.btn_wordle_2_0.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1802,7 +1818,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_4_3.setEnabled(False)
         self.btn_wordle_4_3.setMinimumSize(QSize(50, 50))
         self.btn_wordle_4_3.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_4_3.setFont(font5)
+        self.btn_wordle_4_3.setFont(font3)
         self.btn_wordle_4_3.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1814,7 +1830,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_1_2.setEnabled(False)
         self.btn_wordle_1_2.setMinimumSize(QSize(50, 50))
         self.btn_wordle_1_2.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_1_2.setFont(font5)
+        self.btn_wordle_1_2.setFont(font3)
         self.btn_wordle_1_2.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1826,7 +1842,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_4_0.setEnabled(False)
         self.btn_wordle_4_0.setMinimumSize(QSize(50, 50))
         self.btn_wordle_4_0.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_4_0.setFont(font5)
+        self.btn_wordle_4_0.setFont(font3)
         self.btn_wordle_4_0.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1838,7 +1854,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_2_2.setEnabled(False)
         self.btn_wordle_2_2.setMinimumSize(QSize(50, 50))
         self.btn_wordle_2_2.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_2_2.setFont(font5)
+        self.btn_wordle_2_2.setFont(font3)
         self.btn_wordle_2_2.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1850,7 +1866,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_4_4.setEnabled(False)
         self.btn_wordle_4_4.setMinimumSize(QSize(50, 50))
         self.btn_wordle_4_4.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_4_4.setFont(font5)
+        self.btn_wordle_4_4.setFont(font3)
         self.btn_wordle_4_4.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1862,7 +1878,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_0_3.setEnabled(False)
         self.btn_wordle_0_3.setMinimumSize(QSize(50, 50))
         self.btn_wordle_0_3.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_0_3.setFont(font5)
+        self.btn_wordle_0_3.setFont(font3)
         self.btn_wordle_0_3.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1874,7 +1890,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_2_3.setEnabled(False)
         self.btn_wordle_2_3.setMinimumSize(QSize(50, 50))
         self.btn_wordle_2_3.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_2_3.setFont(font5)
+        self.btn_wordle_2_3.setFont(font3)
         self.btn_wordle_2_3.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1886,7 +1902,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_4_2.setEnabled(False)
         self.btn_wordle_4_2.setMinimumSize(QSize(50, 50))
         self.btn_wordle_4_2.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_4_2.setFont(font5)
+        self.btn_wordle_4_2.setFont(font3)
         self.btn_wordle_4_2.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1898,7 +1914,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_5_0.setEnabled(False)
         self.btn_wordle_5_0.setMinimumSize(QSize(50, 50))
         self.btn_wordle_5_0.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_5_0.setFont(font5)
+        self.btn_wordle_5_0.setFont(font3)
         self.btn_wordle_5_0.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1910,7 +1926,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_2_1.setEnabled(False)
         self.btn_wordle_2_1.setMinimumSize(QSize(50, 50))
         self.btn_wordle_2_1.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_2_1.setFont(font5)
+        self.btn_wordle_2_1.setFont(font3)
         self.btn_wordle_2_1.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1922,7 +1938,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_5_2.setEnabled(False)
         self.btn_wordle_5_2.setMinimumSize(QSize(50, 50))
         self.btn_wordle_5_2.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_5_2.setFont(font5)
+        self.btn_wordle_5_2.setFont(font3)
         self.btn_wordle_5_2.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1934,7 +1950,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_5_3.setEnabled(False)
         self.btn_wordle_5_3.setMinimumSize(QSize(50, 50))
         self.btn_wordle_5_3.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_5_3.setFont(font5)
+        self.btn_wordle_5_3.setFont(font3)
         self.btn_wordle_5_3.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1946,7 +1962,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_1_1.setEnabled(False)
         self.btn_wordle_1_1.setMinimumSize(QSize(50, 50))
         self.btn_wordle_1_1.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_1_1.setFont(font5)
+        self.btn_wordle_1_1.setFont(font3)
         self.btn_wordle_1_1.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1958,7 +1974,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_1_3.setEnabled(False)
         self.btn_wordle_1_3.setMinimumSize(QSize(50, 50))
         self.btn_wordle_1_3.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_1_3.setFont(font5)
+        self.btn_wordle_1_3.setFont(font3)
         self.btn_wordle_1_3.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1970,7 +1986,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_0_0.setEnabled(False)
         self.btn_wordle_0_0.setMinimumSize(QSize(50, 50))
         self.btn_wordle_0_0.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_0_0.setFont(font5)
+        self.btn_wordle_0_0.setFont(font3)
         self.btn_wordle_0_0.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1982,7 +1998,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_1_0.setEnabled(False)
         self.btn_wordle_1_0.setMinimumSize(QSize(50, 50))
         self.btn_wordle_1_0.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_1_0.setFont(font5)
+        self.btn_wordle_1_0.setFont(font3)
         self.btn_wordle_1_0.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -1994,7 +2010,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_2_4.setEnabled(False)
         self.btn_wordle_2_4.setMinimumSize(QSize(50, 50))
         self.btn_wordle_2_4.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_2_4.setFont(font5)
+        self.btn_wordle_2_4.setFont(font3)
         self.btn_wordle_2_4.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2006,7 +2022,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_1_4.setEnabled(False)
         self.btn_wordle_1_4.setMinimumSize(QSize(50, 50))
         self.btn_wordle_1_4.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_1_4.setFont(font5)
+        self.btn_wordle_1_4.setFont(font3)
         self.btn_wordle_1_4.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2018,7 +2034,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_5_1.setEnabled(False)
         self.btn_wordle_5_1.setMinimumSize(QSize(50, 50))
         self.btn_wordle_5_1.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_5_1.setFont(font5)
+        self.btn_wordle_5_1.setFont(font3)
         self.btn_wordle_5_1.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2030,7 +2046,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_3_4.setEnabled(False)
         self.btn_wordle_3_4.setMinimumSize(QSize(50, 50))
         self.btn_wordle_3_4.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_3_4.setFont(font5)
+        self.btn_wordle_3_4.setFont(font3)
         self.btn_wordle_3_4.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2042,7 +2058,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_3_2.setEnabled(False)
         self.btn_wordle_3_2.setMinimumSize(QSize(50, 50))
         self.btn_wordle_3_2.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_3_2.setFont(font5)
+        self.btn_wordle_3_2.setFont(font3)
         self.btn_wordle_3_2.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2054,7 +2070,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_0_4.setEnabled(False)
         self.btn_wordle_0_4.setMinimumSize(QSize(50, 50))
         self.btn_wordle_0_4.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_0_4.setFont(font5)
+        self.btn_wordle_0_4.setFont(font3)
         self.btn_wordle_0_4.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2066,7 +2082,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_3_3.setEnabled(False)
         self.btn_wordle_3_3.setMinimumSize(QSize(50, 50))
         self.btn_wordle_3_3.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_3_3.setFont(font5)
+        self.btn_wordle_3_3.setFont(font3)
         self.btn_wordle_3_3.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2078,7 +2094,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_5_4.setEnabled(False)
         self.btn_wordle_5_4.setMinimumSize(QSize(50, 50))
         self.btn_wordle_5_4.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_5_4.setFont(font5)
+        self.btn_wordle_5_4.setFont(font3)
         self.btn_wordle_5_4.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2090,7 +2106,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_0_1.setEnabled(False)
         self.btn_wordle_0_1.setMinimumSize(QSize(50, 50))
         self.btn_wordle_0_1.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_0_1.setFont(font5)
+        self.btn_wordle_0_1.setFont(font3)
         self.btn_wordle_0_1.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2102,7 +2118,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_0_2.setEnabled(False)
         self.btn_wordle_0_2.setMinimumSize(QSize(50, 50))
         self.btn_wordle_0_2.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_0_2.setFont(font5)
+        self.btn_wordle_0_2.setFont(font3)
         self.btn_wordle_0_2.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2114,7 +2130,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_3_1.setEnabled(False)
         self.btn_wordle_3_1.setMinimumSize(QSize(50, 50))
         self.btn_wordle_3_1.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_3_1.setFont(font5)
+        self.btn_wordle_3_1.setFont(font3)
         self.btn_wordle_3_1.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2126,7 +2142,7 @@ class Ui_MainWindow(object):
         self.btn_wordle_3_0.setEnabled(False)
         self.btn_wordle_3_0.setMinimumSize(QSize(50, 50))
         self.btn_wordle_3_0.setMaximumSize(QSize(50, 50))
-        self.btn_wordle_3_0.setFont(font5)
+        self.btn_wordle_3_0.setFont(font3)
         self.btn_wordle_3_0.setStyleSheet(u"        color: rgb(0, 0, 0);\n"
 "        background-color: rgb(255, 255, 255);\n"
 "")
@@ -2201,16 +2217,13 @@ class Ui_MainWindow(object):
         self.actionScore.setText(QCoreApplication.translate("MainWindow", u"Puntuaci\u00f3n", None))
         self.actionCheckRun.setText(QCoreApplication.translate("MainWindow", u"Comprobar en inicio", None))
         self.actionCheckNow.setText(QCoreApplication.translate("MainWindow", u"Comprobar ahora", None))
-        self.groupBox_3.setTitle("")
-        self.btn_mine.setText(QCoreApplication.translate("MainWindow", u"\U0001f4a3", None))
+        self.groupMine.setTitle("")
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Buscaminas", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Despeja el campo evitando las minas ocultas.", None))
-        self.groupBox_5.setTitle("")
-        self.btn_wordle.setText(QCoreApplication.translate("MainWindow", u"W", None))
+        self.groupWordle.setTitle("")
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Wordle", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Seis intentos. Una palabra. \u00bfPodr\u00e1s lograrlo?", None))
-        self.groupBox_4.setTitle("")
-        self.btn_horse.setText(QCoreApplication.translate("MainWindow", u"\U0001f434", None))
+        self.groupHorse.setTitle("")
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Salto del Caballo", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Mueve el caballo hasta completar el tablero.", None))
         self.groupBox.setTitle("")

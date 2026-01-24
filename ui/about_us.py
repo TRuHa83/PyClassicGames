@@ -17,7 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractButton, QApplication, QDialog, QDialogButtonBox,
     QHBoxLayout, QLabel, QSizePolicy, QWidget)
-import recursos_rc
+import resources_rc
+import resources_rc
 
 class Ui_AboutUs(object):
     def setupUi(self, AboutUs):
@@ -137,7 +138,7 @@ class Ui_AboutUs(object):
         self.label_14 = QLabel(AboutUs)
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(20, 50, 121, 101))
-        self.label_14.setPixmap(QPixmap(u":/assets/assets/logo_128.png"))
+        self.label_14.setPixmap(QPixmap(u":/logo/logo_128.png"))
         self.horizontalLayoutWidget_4 = QWidget(AboutUs)
         self.horizontalLayoutWidget_4.setObjectName(u"horizontalLayoutWidget_4")
         self.horizontalLayoutWidget_4.setGeometry(QRect(20, 350, 231, 20))
