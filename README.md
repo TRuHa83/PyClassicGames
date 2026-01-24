@@ -3,11 +3,9 @@
 ![Status](https://img.shields.io/badge/Status-Development-blue)
 ![Python Version](https://img.shields.io/badge/python-3.13-blue?logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+
 ![GUI Framework](https://img.shields.io/badge/GUI-PySide6-limne?logo=qt&logoColor=white)
 ![Database](https://img.shields.io/badge/Database-SQLite-lime?logo=sqlite&logoColor=white)
-
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/TRuHa83/PyClassicGames?label=Versi%C3%B3n&color=orange)
-![GitHub all releases](https://img.shields.io/github/downloads/TRuHa83/PyClassicGames/total?label=Descargas&color=orange)
 
 >  **Proyecto final de Desarrollo de interfaces**.<br>Una colección moderna de juegos clásicos de lógica y estrategia, desarrollada en Python con una interfaz gráfica robusta.
 
@@ -41,7 +39,7 @@ Con este proyecto demuestro capacidades de desarrollo para software de escritori
 - [x] **Arquitectura:** Separación lógica entre la interfaz (Vistas), los datos (Modelos) y la lógica de juego (Controladores).
 - [x] **Base de Datos:** Sistema persistente que almacena automáticamente las puntuaciones y fecha al finalizar cada partida.
 - [ ] **Informes PDF:** Generación dinámica de reportes de "Salón de la Fama" utilizando la librería **ReportLab**.
-- [ ] **Actualizaciones:** Sistema integrado que consulta el repositorio GitHub para verificar si existen nuevas versiones del software.
+- [x] **Actualizaciones:** Sistema integrado que consulta el repositorio GitHub para verificar si existen nuevas versiones del software.
 
 ---
 
@@ -120,7 +118,9 @@ PyClassicGames/
 │   └── about_as.py       # Vista de Acerca de...
 │
 ├── modules/
-│   └── database.py      # Módulo de base de datos
+│   ├── config.py        # Módulo de configuración
+│   ├── database.py      # Módulo de base de datos
+│   └── update.py        # Módulo de actualizaciones
 │
 ├── main.py              # Punto de entrada
 ├── version.py           # Información de la aplicación
@@ -135,3 +135,4 @@ PyClassicGames/
 ├── README.md            # Documentación
 └── LICENSE              # Licencia del proyecto
 ```
+---

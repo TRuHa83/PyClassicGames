@@ -1,11 +1,12 @@
 [project]
 name = "pyclassicgames"
-version = "0.9.4"
+version = "0.9.6"
 description = "Aplicación de escritorio que integra juegos clásicos de estrategia y lógica"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pyside6>=6.10.1",
+    "requests>=2.32.5",
 ]
 
 [dependency-groups]
