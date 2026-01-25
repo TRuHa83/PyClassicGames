@@ -40,7 +40,7 @@ jobs:
       run: |
         python -m PyInstaller PyClassicGames.spec
 
-    # Renombrado para Linux/MacOS
+    # Renombrado para Linux
     - name: Rename Binary (Linux)
       if: matrix.os == 'ubuntu-latest'
       run: mv dist/PyClassicGames dist/PyClassicGames-Linux-${{ github.ref_name }}
@@ -65,6 +65,19 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     
     steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Extrae el mensaje del tag anotado y lo guarda en una variable de entorno
+    - name: Extract Tag Message
+      id: tag_message
+      run: |
+        TAG_MSG=$(git tag -l --format='%(contents)' ${{ github.ref_name }})
+        echo "RELEASE_BODY<<EOF" >> $GITHUB_ENV
+        echo "$TAG_MSG" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
+
     # Descarga los archivos de antes
     - name: Download Artifacts
       uses: actions/download-artifact@v4
@@ -79,4 +92,5 @@ jobs:
       with:
         draft: true
         generate_release_notes: true
+        body: ${{ env.RELEASE_BODY }}
         files: dist/*
