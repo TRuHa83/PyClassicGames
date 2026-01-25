@@ -4,6 +4,8 @@ import version
 
 from enum import Enum, auto
 
+from custom.launch     import GameButton
+
 from modules.config    import Config
 from modules.update    import Update
 from modules.database  import ScoreGames
@@ -43,10 +45,14 @@ class MainApp:
         self.setting = self.config.get_setting()
         self.state_update = self.setting.get("update")
 
-        self.update = Update(self.window)
+        self.path = self.config.get_path()
+        self.score_games = ScoreGames(self.path)
 
-        path = self.config.get_path()
-        self.score_games = ScoreGames(path)
+        # Agregamos elementos personalizados
+        self._add_components()
+
+        # Cargamos el sistema de actualizaciones
+        self.update = Update(self.window)
 
         # Cargamos la puntuación
         self.score = QDialog()
@@ -66,6 +72,15 @@ class MainApp:
         if self.state_update:
             self.update.auto_check_update()
 
+    def _add_components(self):
+        games_data = f"{self.path}/games/data.json"
+        with open(games_data, "r", encoding="utf-8") as f:
+            games = json.load(f)
+
+        for game in games.values():
+            launch_button = GameButton(game["name"], game["description"], self.path / "assets" / game["icon"])
+            self.ui.menu.layout().addWidget(launch_button)
+
     def _setup_connections(self):
         self.ui.actionMenu.triggered.connect(self._menu)
         self.ui.actionScore.triggered.connect(self._score)
@@ -81,9 +96,9 @@ class MainApp:
 
         self.ui.actionAbout.triggered.connect(self._about)
 
-        self.ui.btn_mine.clicked.connect(self._minesweeper)
-        self.ui.btn_horse.clicked.connect(self._knightstour)
-        self.ui.btn_wordle.clicked.connect(self._wordle)
+        self.ui.menu.findChild(GameButton, "button_buscaminas").clicked.connect(self._minesweeper)
+        self.ui.menu.findChild(GameButton, "button_salto_del_caballo").clicked.connect(self._knightstour)
+        self.ui.menu.findChild(GameButton, "button_wordle").clicked.connect(self._wordle)
 
     def _menu(self):
         self._exit_games()
