@@ -14,10 +14,10 @@
 ## Capturas de Pantalla
 
 <p align="center">
-  <img src="images/menu.png" width="20%" alt="Menu" />
-  <img src="images/buscaminas.png" width="20%" alt="Buscaminas" />
-  <img src="images/saltocaballo.png" width="20%" alt="Salto del Caballo" />
-  <img src="images/wordle.png" width="20%" alt="Wordle" />
+  <img src="images/menu.webp" width="20%" alt="Menu" />
+  <img src="images/buscaminas.webp" width="20%" alt="Buscaminas" />
+  <img src="images/saltocaballo.webp" width="20%" alt="Salto del Caballo" />
+  <img src="images/wordle.webp" width="20%" alt="Wordle" />
 </p>
 
 ## Descripción del Proyecto
