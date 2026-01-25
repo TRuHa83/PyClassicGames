@@ -107,6 +107,9 @@ PyClassicGames/
 │
 ├── data/                # diccionario
 │
+├── custom/
+│   └── launch.py        # Boton personalizado para lanzar juegos
+│
 ├── games/
 │   ├── knightstour.py   # Lógica salto del caballo
 │   ├── minesweeper.py   # Lógica buscaminas
