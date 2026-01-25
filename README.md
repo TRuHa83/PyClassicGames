@@ -139,4 +139,13 @@ PyClassicGames/
 ├── README.md            # Documentación
 └── LICENSE              # Licencia del proyecto
 ```
+
 ---
+
+## Roadmap Futuro
+
+Con el avance del proyecto, se plantean las siguientes mejoras y características que podrían resultar interesante añadir o mejorar:
+
+- [ ] **Mejoras en la Interface**: Separar juegos de la UI principal en ventanas independientes para una mejor experiencia de usuario.
+- [ ] **Launcher dinámico**: Implementar un sistema de plugins que permita añadir nuevos juegos sin modificar el código base.
+
