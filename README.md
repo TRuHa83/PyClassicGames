@@ -38,8 +38,8 @@ Con este proyecto demuestro capacidades de desarrollo para software de escritori
 
 - [x] **Arquitectura:** Separación lógica entre la interfaz (Vistas), los datos (Modelos) y la lógica de juego (Controladores).
 - [x] **Base de Datos:** Sistema persistente que almacena automáticamente las puntuaciones y fecha al finalizar cada partida.
-- [ ] **Informes PDF:** Generación dinámica de reportes de "Salón de la Fama" utilizando la librería **ReportLab**.
 - [x] **Actualizaciones:** Sistema integrado que consulta el repositorio GitHub para verificar si existen nuevas versiones del software.
+- [ ] **Informes PDF:** Generación dinámica de reportes de "Salón de la Fama" utilizando la librería **ReportLab**.
 
 ---
 
