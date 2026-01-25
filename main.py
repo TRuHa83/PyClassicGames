@@ -1,4 +1,5 @@
 import sys
+import json
 import version
 
 from enum import Enum, auto
