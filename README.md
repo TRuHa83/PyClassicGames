@@ -111,6 +111,7 @@ PyClassicGames/
 │   └── launch.py        # Boton personalizado para lanzar juegos
 │
 ├── games/
+│   ├── data.json        # Datos de cada juegos
 │   ├── knightstour.py   # Lógica salto del caballo
 │   ├── minesweeper.py   # Lógica buscaminas
 │   └── wordle.py        # Lógica Wordle
