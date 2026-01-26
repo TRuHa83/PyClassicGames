@@ -102,7 +102,7 @@ wheels = [
 
 [[package]]
 name = "pyclassicgames"
-version = "0.9.7"
+version = "0.9.8"
 source = { virtual = "." }
 dependencies = [
     { name = "pyside6" },
