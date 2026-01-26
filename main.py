@@ -1,5 +1,4 @@
 import sys
-import json
 import version
 
 from enum import Enum, auto
@@ -14,6 +13,7 @@ from ui.score          import Ui_Score
 from ui.about_us       import Ui_AboutUs
 from ui.main_window    import Ui_MainWindow
 
+from games.datagame    import games
 from games.wordle      import Wordle
 from games.minesweeper import MinesWeeper
 from games.knightstour import KnightsTour
@@ -34,6 +34,7 @@ class SelectGame(Enum):
 class MainApp:
     def __init__(self):
         self.state = None
+        self.data_games = games
 
         # Cargamos la interfaz
         self.window = QMainWindow()
@@ -73,11 +74,7 @@ class MainApp:
             self.update.auto_check_update()
 
     def _add_components(self):
-        games_data = f"{self.path}/games/data.json"
-        with open(games_data, "r", encoding="utf-8") as f:
-            games = json.load(f)
-
-        for game in games.values():
+        for game in self.data_games.values():
             launch_button = GameButton(game["name"], game["description"], self.path / "assets" / game["icon"])
             self.ui.menu.layout().addWidget(launch_button)
 

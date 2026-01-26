@@ -1,4 +1,4 @@
-{
+games = {
   "game1": {
     "name": "Buscaminas",
     "description": "Despeja el campo evitando las minas ocultas.",
