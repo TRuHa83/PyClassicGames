@@ -1,7 +1,10 @@
 import random
+import sys
 
-from PySide6.QtGui import QAction
-from PySide6.QtCore import QObject, Qt, QEvent, QTimer
+from pathlib import Path
+
+from PySide6.QtGui     import QAction
+from PySide6.QtCore    import QObject, Qt, QEvent, QTimer
 from PySide6.QtWidgets import QPushButton, QMessageBox, QLabel
 
 
@@ -121,13 +124,24 @@ class Wordle(QObject):
 
     def _load_words(self):
         self.valid_words = []
-        with open("data/valid_words.txt", 'r', encoding='utf-8') as f:
+
+        file_path = Path("data/valid_words.txt")
+        if not file_path.exists():
+            file_path = Path(sys._MEIPASS) / file_path
+
+        with open(file_path, 'r', encoding='utf-8') as f:
             for linea in f:
                 self.valid_words.append(linea.strip().lower())
 
     def _get_secret_word(self):
         index = random.randint(0, 484)
-        with open("data/words.txt", 'r', encoding='utf-8') as f:
+
+        file_path = Path("data/words.txt")
+        if not file_path.exists():
+            file_path = Path(sys._MEIPASS) / file_path
+
+
+        with open(file_path, 'r', encoding='utf-8') as f:
             for i, linea in enumerate(f):
                 if i == index:
                     word = linea.strip().lower()

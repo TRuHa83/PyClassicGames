@@ -1,4 +1,3 @@
-import os
 import json
 
 from pathlib import Path
@@ -7,7 +6,7 @@ from pathlib import Path
 class Config:
     def __init__(self, ui_main):
         self.ui_main = ui_main
-        self.work_path = Path(os.getcwd())
+        self.work_path = Path.cwd()
         self.config_file = self.work_path / "config.json"
 
         self.setting = self.get_setting()

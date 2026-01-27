@@ -1,7 +1,8 @@
 import sys
 import version
 
-from enum import Enum, auto
+from enum    import Enum, auto
+from pathlib import Path
 
 from custom.launch     import GameButton
 
@@ -75,7 +76,11 @@ class MainApp:
 
     def _add_components(self):
         for game in self.data_games.values():
-            launch_button = GameButton(game["name"], game["description"], self.path / "assets" / game["icon"])
+            icon_path = self.path / "assets" / game["icon"]
+            if not icon_path.exists():
+                icon_path = Path(sys._MEIPASS) / "assets" / game["icon"]
+
+            launch_button = GameButton(game["name"], game["description"], icon_path)
             self.ui.menu.layout().addWidget(launch_button)
 
     def _setup_connections(self):
@@ -148,17 +153,17 @@ class MainApp:
         ]
 
         # Iteramos cada tab con su puntuación
-        for sp, score in zip(score_tab, self.score_game):
+        for st, score in zip(score_tab, self.score_game):
             # Le damos el ancho maximo a la primera columna
-            sp.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+            st.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
 
             # Agregamos tantas filas como entradas hay
-            sp.setRowCount(len(score))
+            st.setRowCount(len(score))
 
             # Introducimos los valores en la tabla
             for i, s in enumerate(score):
-                sp.setItem(i, 0, QTableWidgetItem(str(s["date"])))
-                sp.setItem(i, 1, QTableWidgetItem(str(s["score"])))
+                st.setItem(i, 0, QTableWidgetItem(str(s["date"])))
+                st.setItem(i, 1, QTableWidgetItem(str(s["score"])))
 
         self.score.exec()
 
