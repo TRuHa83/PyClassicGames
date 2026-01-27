@@ -55,16 +55,16 @@ class Ui_Score(object):
         self.gridLayout_3 = QGridLayout(self.tab_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setContentsMargins(0, 10, 0, 10)
-        self.score_wordle = QTableWidget(self.tab_3)
-        if (self.score_wordle.columnCount() < 2):
-            self.score_wordle.setColumnCount(2)
+        self.score_horse = QTableWidget(self.tab_3)
+        if (self.score_horse.columnCount() < 2):
+            self.score_horse.setColumnCount(2)
         __qtablewidgetitem2 = QTableWidgetItem()
-        self.score_wordle.setHorizontalHeaderItem(0, __qtablewidgetitem2)
+        self.score_horse.setHorizontalHeaderItem(0, __qtablewidgetitem2)
         __qtablewidgetitem3 = QTableWidgetItem()
-        self.score_wordle.setHorizontalHeaderItem(1, __qtablewidgetitem3)
-        self.score_wordle.setObjectName(u"score_wordle")
+        self.score_horse.setHorizontalHeaderItem(1, __qtablewidgetitem3)
+        self.score_horse.setObjectName(u"score_horse")
 
-        self.gridLayout_3.addWidget(self.score_wordle, 0, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.score_horse, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_2 = QWidget()
@@ -72,16 +72,16 @@ class Ui_Score(object):
         self.gridLayout_2 = QGridLayout(self.tab_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setContentsMargins(0, 10, 0, 10)
-        self.score_horse = QTableWidget(self.tab_2)
-        if (self.score_horse.columnCount() < 2):
-            self.score_horse.setColumnCount(2)
+        self.score_wordle = QTableWidget(self.tab_2)
+        if (self.score_wordle.columnCount() < 2):
+            self.score_wordle.setColumnCount(2)
         __qtablewidgetitem4 = QTableWidgetItem()
-        self.score_horse.setHorizontalHeaderItem(0, __qtablewidgetitem4)
+        self.score_wordle.setHorizontalHeaderItem(0, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
-        self.score_horse.setHorizontalHeaderItem(1, __qtablewidgetitem5)
-        self.score_horse.setObjectName(u"score_horse")
+        self.score_wordle.setHorizontalHeaderItem(1, __qtablewidgetitem5)
+        self.score_wordle.setObjectName(u"score_wordle")
 
-        self.gridLayout_2.addWidget(self.score_horse, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.score_wordle, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
 
@@ -104,7 +104,7 @@ class Ui_Score(object):
         self.retranslateUi(Score)
         self.btn_close.clicked.connect(Score.close)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(Score)
@@ -117,14 +117,14 @@ class Ui_Score(object):
         ___qtablewidgetitem1 = self.score_mines.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("Score", u"Puntuaci\u00f3n", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), QCoreApplication.translate("Score", u"Buscaminas", None))
-        ___qtablewidgetitem2 = self.score_wordle.horizontalHeaderItem(0)
+        ___qtablewidgetitem2 = self.score_horse.horizontalHeaderItem(0)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Score", u"Fecha y hora", None));
-        ___qtablewidgetitem3 = self.score_wordle.horizontalHeaderItem(1)
+        ___qtablewidgetitem3 = self.score_horse.horizontalHeaderItem(1)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("Score", u"Puntuaci\u00f3n", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Score", u"Salto del caballo", None))
-        ___qtablewidgetitem4 = self.score_horse.horizontalHeaderItem(0)
+        ___qtablewidgetitem4 = self.score_wordle.horizontalHeaderItem(0)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("Score", u"Fecha y hora", None));
-        ___qtablewidgetitem5 = self.score_horse.horizontalHeaderItem(1)
+        ___qtablewidgetitem5 = self.score_wordle.horizontalHeaderItem(1)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("Score", u"Puntuaci\u00f3n", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Score", u"Wordle", None))
         self.btn_export.setText(QCoreApplication.translate("Score", u"Exportar", None))

@@ -25,7 +25,7 @@
         <enum>QTabWidget::TabShape::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="documentMode">
         <bool>true</bool>
@@ -81,7 +81,7 @@
           <number>10</number>
          </property>
          <item row="0" column="0">
-          <widget class="QTableWidget" name="score_wordle">
+          <widget class="QTableWidget" name="score_horse">
            <column>
             <property name="text">
              <string>Fecha y hora</string>
@@ -114,7 +114,7 @@
           <number>10</number>
          </property>
          <item row="0" column="0">
-          <widget class="QTableWidget" name="score_horse">
+          <widget class="QTableWidget" name="score_wordle">
            <column>
             <property name="text">
              <string>Fecha y hora</string>
