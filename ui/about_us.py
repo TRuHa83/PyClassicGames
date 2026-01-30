@@ -18,7 +18,6 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QAbstractButton, QApplication, QDialog, QDialogButtonBox,
     QHBoxLayout, QLabel, QSizePolicy, QWidget)
 import resources_rc
-import resources_rc
 
 class Ui_AboutUs(object):
     def setupUi(self, AboutUs):
@@ -33,7 +32,12 @@ class Ui_AboutUs(object):
         AboutUs.setSizePolicy(sizePolicy)
         AboutUs.setMinimumSize(QSize(400, 550))
         AboutUs.setMaximumSize(QSize(400, 550))
-        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MailMarkImportant))
+        icon = QIcon()
+        if QIcon.hasThemeIcon(QIcon.ThemeIcon.HelpAbout):
+            icon = QIcon.fromTheme(QIcon.ThemeIcon.HelpAbout)
+        else:
+            icon.addFile(u":/logo/icon_128.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         AboutUs.setWindowIcon(icon)
         self.buttonBox = QDialogButtonBox(AboutUs)
         self.buttonBox.setObjectName(u"buttonBox")
@@ -138,7 +142,7 @@ class Ui_AboutUs(object):
         self.label_14 = QLabel(AboutUs)
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(20, 50, 121, 101))
-        self.label_14.setPixmap(QPixmap(u":/logo/logo_128.png"))
+        self.label_14.setPixmap(QPixmap(u":/logo/icon_128.png"))
         self.horizontalLayoutWidget_4 = QWidget(AboutUs)
         self.horizontalLayoutWidget_4.setObjectName(u"horizontalLayoutWidget_4")
         self.horizontalLayoutWidget_4.setGeometry(QRect(20, 350, 231, 20))

@@ -35,7 +35,8 @@
    <string>Acerca de</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="QIcon::ThemeIcon::MailMarkImportant"/>
+   <iconset theme="QIcon::ThemeIcon::HelpAbout" resource="../assets/resources.qrc">
+    <normaloff>:/logo/icon_128.png</normaloff>:/logo/icon_128.png</iconset>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -334,7 +335,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="../assets/resources.qrc">:/logo/logo_128.png</pixmap>
+    <pixmap resource="../assets/resources.qrc">:/logo/icon_128.png</pixmap>
    </property>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget_4">
@@ -406,7 +407,6 @@
  </widget>
  <resources>
   <include location="../assets/resources.qrc"/>
-  <include location="../resources.qrc"/>
  </resources>
  <connections>
   <connection>

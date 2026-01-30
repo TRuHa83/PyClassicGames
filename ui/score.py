@@ -18,12 +18,23 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QDialog, QGridLayout, QHeaderView,
     QPushButton, QSizePolicy, QTabWidget, QTableWidget,
     QTableWidgetItem, QVBoxLayout, QWidget)
+import resources_rc
 
 class Ui_Score(object):
     def setupUi(self, Score):
         if not Score.objectName():
             Score.setObjectName(u"Score")
         Score.resize(468, 623)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Score.sizePolicy().hasHeightForWidth())
+        Score.setSizePolicy(sizePolicy)
+        Score.setMinimumSize(QSize(468, 623))
+        Score.setMaximumSize(QSize(468, 623))
+        icon = QIcon()
+        icon.addFile(u":/logo/icon_128.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        Score.setWindowIcon(icon)
         self.verticalLayout_2 = QVBoxLayout(Score)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout = QVBoxLayout()
@@ -104,7 +115,7 @@ class Ui_Score(object):
         self.retranslateUi(Score)
         self.btn_close.clicked.connect(Score.close)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Score)

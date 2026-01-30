@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../assets/resources.qrc">
-    <normaloff>:/logo/logo_128.png</normaloff>:/logo/logo_128.png</iconset>
+    <normaloff>:/logo/icon_128.png</normaloff>:/logo/icon_128.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -6326,11 +6326,17 @@
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
+   </property>
    <property name="text">
     <string>Acerda de...</string>
    </property>
   </action>
   <action name="actionMenu">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ImageLoading"/>
+   </property>
    <property name="text">
     <string>Menu Principal</string>
    </property>
@@ -6351,6 +6357,9 @@
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ApplicationExit"/>
+   </property>
    <property name="text">
     <string>Salir</string>
    </property>
@@ -6397,6 +6406,9 @@
    </property>
   </action>
   <action name="actionCheckNow">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ObjectRotateRight"/>
+   </property>
    <property name="text">
     <string>Comprobar ahora</string>
    </property>
