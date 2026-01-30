@@ -16,8 +16,8 @@ from ui.score          import Ui_Score
 from ui.about_us       import Ui_AboutUs
 from ui.main_window    import Ui_MainWindow
 
-from games.datagame    import games
 from games.wordle      import Wordle
+from games.datagame    import games
 from games.minesweeper import MinesWeeper
 from games.knightstour import KnightsTour
 
@@ -38,6 +38,9 @@ class MainApp:
     def __init__(self):
         self.state = None
         self.data_games = games
+
+        #self.score_games = ScoreGames()
+        self.score_game = []
 
         # Cargamos la interfaz
         self.window = QMainWindow()
@@ -172,8 +175,8 @@ class MainApp:
         self.score.exec()
 
     def _export_to_pdf(self):
-        index = self.score_ui.tabGame.currentIndex()
-        game_name = self.score_ui.tabGame.tabText(index)
+        index = self.score_ui.tabWidget.currentIndex()
+        game_name = self.score_ui.tabWidget.tabText(index)
 
         # Generar nombre por defecto con fecha y nombre del juego
         today = datetime.now().strftime("%Y%m%d_%H%M%S")
