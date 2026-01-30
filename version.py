@@ -1,5 +1,5 @@
 __github_url__ = "https://github.com/TRuHa83/PyClassicGames"
 __author__     = "Sergio Trujillo de la Nuez"
 __app_name__   = "PyClassicGames"
-__version__    = "0.9.9"
+__version__    = "1.0.0"
 __year__       = "2026"
