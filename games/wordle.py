@@ -42,6 +42,7 @@ class Wordle(QObject):
             self.grid_btns.append([])
             for c in range(5):
                 btn = self.ui_widget.findChild(QPushButton, f"btn_wordle_{r}_{c}")
+                btn.setFocusPolicy(Qt.NoFocus)
                 self.grid_btns[r].append(btn)
 
         self._load_words()
@@ -76,7 +77,7 @@ class Wordle(QObject):
         self._update_score()
 
         # Activamos los eventos externos
-        self.ui_widget.installEventFilter(self)
+        self.ui_widget.window().installEventFilter(self)
 
     def eventFilter(self, source, event):
         if not self.finished:
@@ -247,5 +248,5 @@ class Wordle(QObject):
 
     def exit_game(self):
         self.action_reset.triggered.disconnect(self._reset_game)
-        self.ui_widget.removeEventFilter(self)
+        self.ui_widget.window().removeEventFilter(self)
         self.timer.stop()
